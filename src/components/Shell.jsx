@@ -79,9 +79,13 @@ export function Shell({ currentPath, currentPage, onNavigate, children }) {
           <div className="brand-card__organization">
             <div className="brand-card__organization-head">
               <span className="brand-card__organization-badge">Organización</span>
-              <strong>{CRH_BRAND.demoClient}</strong>
+              <strong>Cliente demo</strong>
             </div>
             <dl className="brand-card__organization-meta">
+              <div>
+                <dt>Cliente demo</dt>
+                <dd>Medical P-DROZ</dd>
+              </div>
               <div>
                 <dt>Backend</dt>
                 <dd>{runtimeStatus.connected ? 'Conectado' : 'Modo fallback'}</dd>
@@ -101,7 +105,7 @@ export function Shell({ currentPath, currentPage, onNavigate, children }) {
         <div className="sidebar__support">
           <span className="eyebrow">CRH Assist</span>
           <p>Centro ejecutivo para proteger margen, continuidad y resultado asistencial.</p>
-          <small>{CRH_BRAND.demoClient}</small>
+          <small>Cliente demo: Medical P-DROZ</small>
         </div>
 
         <nav className="sidebar__nav" aria-label="Principal">

@@ -185,16 +185,23 @@ export function DashboardPage() {
           <p className="command-hero__slogan">{CRH_BRAND.slogan}</p>
         </article>
 
-        <aside className="command-hero__status">
-          <span className={`executive-status executive-status--${railwayConnected ? 'success' : 'warning'}`}>
-            {railwayConnected ? 'Backend conectado' : 'Modo fallback'}
-          </span>
-          <span className={`executive-status executive-status--${railwayConnected ? 'primary' : 'warning'}`}>
-            {railwayConnected ? 'Producción conectada' : 'Producción no disponible'}
-          </span>
-          <span className="executive-status executive-status--dark">
-            Entorno {railwayEnvironment === 'production' ? 'producción' : railwayEnvironment}
-          </span>
+        <aside className="command-hero__insight">
+          <span className="eyebrow">CRH Assist</span>
+          <h3>Prioridad ejecutiva actual</h3>
+          <p>
+            La lectura institucional concentra el mayor riesgo en contratos PGP con presión farmacéutica,
+            autorizaciones pendientes y pacientes críticos de continuidad.
+          </p>
+          <div className="command-hero__insight-metrics">
+            <div>
+              <span>Score consolidado</span>
+              <strong>{crhAssistCommandCenter.score}/100</strong>
+            </div>
+            <div>
+              <span>Alertas críticas</span>
+              <strong>{crhAssistCommandCenter.criticalAlerts}</strong>
+            </div>
+          </div>
         </aside>
       </section>
 
@@ -215,7 +222,7 @@ export function DashboardPage() {
           <span className="eyebrow">Organización</span>
           <dl className="organization-card__meta">
             <div>
-              <dt>IPS Demo</dt>
+              <dt>Cliente demo</dt>
               <dd>Medical P-DROZ</dd>
             </div>
             <div>
