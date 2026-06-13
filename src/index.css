@@ -81,11 +81,11 @@ dt {
   height: auto;
   max-width: 320px;
   object-fit: contain;
-  object-position: left center;
+  object-position: center center;
 }
 
 .brand-logo--compact {
-  max-width: 220px;
+  max-width: 140px;
 }
 
 .brand-logo--mono {
@@ -117,7 +117,7 @@ dt {
 }
 
 .app-loader__logo {
-  max-width: 360px;
+  max-width: 240px;
 }
 
 .app-loader__title {
@@ -185,7 +185,7 @@ dt {
 }
 
 .brand-card__logo {
-  max-width: 230px;
+  max-width: 128px;
 }
 
 .brand-card strong,
@@ -292,8 +292,8 @@ dt {
 }
 
 .topbar__logo {
-  width: 176px;
-  min-width: 176px;
+  width: 96px;
+  min-width: 96px;
 }
 
 .topbar h2 {
@@ -340,6 +340,10 @@ dt {
 .page-stack {
   display: grid;
   gap: 24px;
+}
+
+.page-stack--dashboard {
+  gap: 28px;
 }
 
 .page-header {
@@ -432,12 +436,17 @@ dt {
 }
 
 .institutional-hero__logo {
-  max-width: 340px;
+  max-width: 220px;
 }
 
 .institutional-hero__copy h3 {
   font-size: 1.4rem;
   margin: 6px 0 10px;
+}
+
+.panel-heading {
+  display: grid;
+  gap: 10px;
 }
 
 .institutional-hero__services {
@@ -460,6 +469,88 @@ dt {
   background: rgba(255, 255, 255, 0.78);
 }
 
+.institutional-hero__services--premium {
+  display: grid;
+  gap: 18px;
+  align-content: start;
+}
+
+.service-pills--dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.coverage-card {
+  padding: 16px 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(13, 110, 253, 0.08);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.kpi-strip__card,
+.executive-kpi,
+.executive-card {
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(13, 110, 253, 0.08);
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: var(--shadow-soft);
+}
+
+.kpi-strip__card {
+  padding: 16px;
+  display: grid;
+  gap: 8px;
+}
+
+.kpi-strip__card span,
+.executive-kpi__label {
+  color: var(--color-muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.kpi-strip__card strong,
+.executive-kpi__value,
+.executive-card__value {
+  font-size: 1.9rem;
+  color: var(--color-text);
+  line-height: 1;
+}
+
+.kpi-strip__card p,
+.executive-kpi__meta {
+  color: var(--color-muted);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.kpi-strip__card--primary,
+.executive-kpi--primary {
+  background: linear-gradient(180deg, rgba(13, 110, 253, 0.08), rgba(255, 255, 255, 0.98));
+}
+
+.kpi-strip__card--success,
+.executive-kpi--success {
+  background: linear-gradient(180deg, rgba(40, 167, 69, 0.08), rgba(255, 255, 255, 0.98));
+}
+
+.kpi-strip__card--warning,
+.executive-kpi--warning {
+  background: linear-gradient(180deg, rgba(13, 110, 253, 0.05), rgba(255, 255, 255, 0.98));
+}
+
+.kpi-strip__card--danger,
+.executive-kpi--danger {
+  background: linear-gradient(180deg, rgba(255, 145, 77, 0.12), rgba(255, 255, 255, 0.98));
+}
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -468,6 +559,10 @@ dt {
 
 .stats-grid--compact {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.stats-grid--executive {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
 }
 
 .stat-card {
@@ -501,6 +596,141 @@ dt {
 .stat-card__value {
   font-size: 2rem;
   color: var(--color-text);
+}
+
+.executive-kpi {
+  padding: 18px;
+  display: grid;
+  gap: 10px;
+}
+
+.executive-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.executive-card {
+  padding: 18px;
+  display: grid;
+  gap: 14px;
+}
+
+.executive-card__head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: start;
+}
+
+.executive-card h3 {
+  font-size: 1rem;
+}
+
+.executive-card p {
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+.dashboard-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.intelligence-grid,
+.finance-grid,
+.branch-performance {
+  display: grid;
+  gap: 14px;
+}
+
+.intelligence-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.intelligence-card,
+.finance-card,
+.branch-performance__row {
+  padding: 18px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(13, 110, 253, 0.08);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.intelligence-card:hover,
+.finance-card:hover,
+.executive-card:hover,
+.executive-kpi:hover,
+.kpi-strip__card:hover,
+.branch-row--card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px rgba(13, 110, 253, 0.1);
+}
+
+.intelligence-card__head {
+  margin-bottom: 12px;
+}
+
+.intelligence-card--success {
+  background: linear-gradient(180deg, rgba(40, 167, 69, 0.07), rgba(255, 255, 255, 0.98));
+}
+
+.intelligence-card--warning {
+  background: linear-gradient(180deg, rgba(13, 110, 253, 0.05), rgba(255, 255, 255, 0.98));
+}
+
+.intelligence-card--danger {
+  background: linear-gradient(180deg, rgba(255, 145, 77, 0.1), rgba(255, 255, 255, 0.98));
+}
+
+.intelligence-card p,
+.finance-card p {
+  color: var(--color-muted);
+  line-height: 1.55;
+}
+
+.finance-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.finance-card {
+  display: grid;
+  gap: 10px;
+}
+
+.finance-card span {
+  color: var(--color-muted);
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.finance-card strong {
+  font-size: 1.9rem;
+  line-height: 1;
+}
+
+.branch-performance__row {
+  display: grid;
+  gap: 10px;
+}
+
+.branch-performance__head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+}
+
+.branch-list--grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.branch-row--card {
+  grid-template-columns: 1fr;
+  align-items: start;
 }
 
 .split-grid {
@@ -897,7 +1127,7 @@ textarea::placeholder {
 }
 
 .login-screen__logo {
-  max-width: 380px;
+  max-width: 220px;
   margin-bottom: 12px;
 }
 
@@ -937,7 +1167,7 @@ textarea::placeholder {
 }
 
 .identity-card__hero-logo {
-  max-width: 250px;
+  max-width: 150px;
 }
 
 .identity-card__list {
@@ -960,13 +1190,295 @@ textarea::placeholder {
   gap: 10px;
 }
 
+.muted-note {
+  margin: 0 0 14px;
+  color: var(--color-muted);
+  font-size: 0.86rem;
+}
+
 .mobile-nav {
   display: none;
+}
+
+.crh-hero__brand {
+  background:
+    linear-gradient(145deg, rgba(13, 110, 253, 0.08), rgba(40, 167, 69, 0.06)),
+    #fff;
+}
+
+.crh-kpi-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.kpi-strip--4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.crh-contract-list,
+.patient-selector,
+.assist-panel,
+.compact-stack {
+  display: grid;
+  gap: 14px;
+}
+
+.crh-contract-row,
+.patient-selector__item,
+.assist-card,
+.compact-row,
+.recommendation-card,
+.insight-card,
+.vital-card,
+.contract-header div {
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(13, 110, 253, 0.08);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: var(--shadow-soft);
+}
+
+.crh-contract-row,
+.compact-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.9fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+}
+
+.crh-360-layout {
+  display: grid;
+  grid-template-columns: 0.9fr 1.35fr 0.95fr;
+  gap: 24px;
+}
+
+.crh-360-layout--contract {
+  grid-template-columns: 0.95fr 1.35fr 0.9fr;
+}
+
+.crh-360-layout--history {
+  grid-template-columns: 1.6fr 0.9fr;
+}
+
+.filters-grid--crh {
+  grid-template-columns: minmax(0, 1.8fr) repeat(3, minmax(0, 1fr));
+}
+
+.patient-selector__item {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+  padding: 16px 18px;
+  text-align: left;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.patient-selector__item:hover,
+.patient-selector__item--active {
+  transform: translateY(-2px);
+  border-color: rgba(13, 110, 253, 0.2);
+  box-shadow: 0 16px 34px rgba(13, 110, 253, 0.12);
+}
+
+.patient-selector__item--active {
+  background: linear-gradient(145deg, rgba(13, 110, 253, 0.08), rgba(255, 255, 255, 0.96));
+}
+
+.patient-selector__item p,
+.crh-contract-row p,
+.assist-card p,
+.insight-card p,
+.compact-row p,
+.recommendation-card p {
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+.patient-selector__meta {
+  display: grid;
+  justify-items: end;
+  gap: 8px;
+  color: var(--color-muted);
+  font-weight: 700;
+}
+
+.patient-360 {
+  display: grid;
+  gap: 18px;
+}
+
+.patient-360__identity {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.patient-360__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.detail-grid--triple {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.insight-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.insight-grid--single {
+  grid-template-columns: 1fr;
+}
+
+.insight-card {
+  padding: 18px;
+  display: grid;
+  gap: 12px;
+}
+
+.clean-list {
+  display: grid;
+  gap: 10px;
+  padding-left: 18px;
+  margin: 0;
+}
+
+.clean-list li {
+  line-height: 1.55;
+}
+
+.clean-list li strong {
+  display: block;
+  margin-bottom: 2px;
+}
+
+.clean-list li span {
+  color: var(--color-muted);
+  font-size: 0.92rem;
+}
+
+.compact-row {
+  padding: 14px 16px;
+}
+
+.compact-row span,
+.contract-header span,
+.vital-card span {
+  color: var(--color-muted);
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.recommendation-card {
+  padding: 18px 20px;
+  background:
+    linear-gradient(155deg, rgba(13, 110, 253, 0.07), rgba(40, 167, 69, 0.08)),
+    #fff;
+}
+
+.risk-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.assist-card {
+  padding: 18px;
+  display: grid;
+  gap: 12px;
+}
+
+.assist-card__head {
+  display: flex;
+}
+
+.assist-card small {
+  color: var(--color-muted);
+  line-height: 1.4;
+}
+
+.assist-card--primary {
+  background: linear-gradient(180deg, rgba(13, 110, 253, 0.06), rgba(255, 255, 255, 0.98));
+}
+
+.assist-card--warning {
+  background: linear-gradient(180deg, rgba(245, 158, 11, 0.12), rgba(255, 255, 255, 0.98));
+}
+
+.assist-card--danger {
+  background: linear-gradient(180deg, rgba(239, 68, 68, 0.08), rgba(255, 255, 255, 0.98));
+}
+
+.contract-header {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.contract-header div {
+  padding: 16px;
+  display: grid;
+  gap: 8px;
+}
+
+.vital-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.vital-card {
+  padding: 16px;
+  display: grid;
+  gap: 8px;
+}
+
+.rules-catalog {
+  display: grid;
+  gap: 18px;
+}
+
+.rule-card {
+  display: grid;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid rgba(13, 110, 253, 0.12);
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(242, 244, 247, 0.82));
+  box-shadow: 0 18px 44px rgba(15, 23, 42, 0.06);
+}
+
+.rule-card__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: start;
+}
+
+.rule-card__head p {
+  margin-top: 6px;
+  color: var(--color-muted);
+}
+
+.rule-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.recommendation-card--soft {
+  background: linear-gradient(180deg, rgba(13, 110, 253, 0.05), rgba(255, 255, 255, 0.98));
 }
 
 @media (max-width: 1180px) {
   .institutional-hero,
   .stats-grid,
+  .stats-grid--executive,
+  .dashboard-columns,
   .note-grid,
   .branch-cards,
   .specialty-grid,
@@ -976,9 +1488,27 @@ textarea::placeholder {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .executive-grid,
+  .kpi-strip,
+  .intelligence-grid,
+  .finance-grid,
+  .branch-list--grid,
+  .contract-header,
+  .vital-grid,
+  .detail-grid--triple,
+  .crh-kpi-grid,
+  .kpi-strip--4,
+  .risk-summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .split-grid,
   .split-grid--wide,
-  .clinical-grid {
+  .clinical-grid,
+  .crh-360-layout,
+  .crh-360-layout--contract,
+  .crh-360-layout--history,
+  .filters-grid--crh {
     grid-template-columns: 1fr;
   }
 
@@ -1004,8 +1534,8 @@ textarea::placeholder {
   }
 
   .topbar__logo {
-    width: 140px;
-    min-width: 140px;
+    width: 84px;
+    min-width: 84px;
   }
 
   .mobile-nav {
@@ -1062,19 +1592,35 @@ textarea::placeholder {
 
   .stats-grid,
   .stats-grid--compact,
+  .stats-grid--executive,
+  .crh-kpi-grid,
+  .dashboard-columns,
   .note-grid,
   .branch-cards,
   .specialty-grid,
   .role-grid,
   .filters-grid,
   .detail-grid,
-  .login-screen__grid {
+  .executive-grid,
+  .kpi-strip,
+  .kpi-strip--4,
+  .intelligence-grid,
+  .finance-grid,
+  .branch-list--grid,
+  .login-screen__grid,
+  .contract-header,
+  .detail-grid--triple,
+  .vital-grid,
+  .insight-grid,
+  .risk-summary-grid {
     grid-template-columns: 1fr;
   }
 
   .timeline-item,
   .branch-row,
-  .chart-row {
+  .chart-row,
+  .crh-contract-row,
+  .compact-row {
     grid-template-columns: 1fr;
   }
 
@@ -1086,6 +1632,26 @@ textarea::placeholder {
     width: 100%;
     max-width: 100%;
     min-width: 0;
+    margin-inline: auto;
+  }
+
+  .executive-card__head {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .rule-card__head {
+    grid-template-columns: 1fr;
+  }
+
+  .patient-selector__item,
+  .patient-360__identity {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .patient-selector__meta {
+    justify-items: start;
   }
 
   .data-table {

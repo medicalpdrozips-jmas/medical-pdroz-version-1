@@ -7,7 +7,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['icons/icon-medical.svg', 'icons/icon-medical-mask.svg', 'brand/medical-pdroz-logo.svg'],
+      includeAssets: ['logo-medical-pdroz.png'],
       manifest: {
         name: 'MEDICAL PDROZ IPS',
         short_name: 'MEDICAL PDROZ',
@@ -19,15 +19,15 @@ export default defineConfig({
         scope: '/',
         icons: [
           {
-            src: '/icons/icon-medical.svg',
+            src: '/logo-medical-pdroz.png',
             sizes: '512x512',
-            type: 'image/svg+xml',
+            type: 'image/png',
             purpose: 'any',
           },
           {
-            src: '/icons/icon-medical-mask.svg',
+            src: '/logo-medical-pdroz.png',
             sizes: '512x512',
-            type: 'image/svg+xml',
+            type: 'image/png',
             purpose: 'maskable',
           },
         ],

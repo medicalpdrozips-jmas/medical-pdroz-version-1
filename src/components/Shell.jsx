@@ -3,9 +3,11 @@ import { BrandLogo } from './BrandLogo'
 
 const iconPaths = {
   grid: 'M5 5h6v6H5zm8 0h6v6h-6zM5 13h6v6H5zm8 0h6v6h-6z',
+  spark: 'M12 2l1.8 4.7L19 8.5l-4 3.2 1.4 5-4.4-2.8-4.4 2.8 1.4-5-4-3.2 5.2-1.8z',
   patient: 'M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0 2c-4.4 0-8 2-8 4.5V20h16v-1.5C20 16 16.4 14 12 14z',
   calendar: 'M7 2v3M17 2v3M4 8h16M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z',
   document: 'M8 3h6l5 5v13H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm5 1v5h5',
+  contract: 'M7 4h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm2 4h6m-6 4h6m-6 4h4',
   capsule: 'M8.5 8.5l7 7m-9.5 2.5a4.95 4.95 0 0 1 0-7l3-3a4.95 4.95 0 0 1 7 7l-3 3a4.95 4.95 0 0 1-7 0z',
   lab: 'M10 3v5l-5 8a3 3 0 0 0 2.5 4.5h9A3 3 0 0 0 19 16l-5-8V3M8 13h8',
   building: 'M5 20V4h14v16M9 8h2m2 0h2m-6 4h2m2 0h2',
@@ -30,20 +32,24 @@ export function Shell({ currentPath, currentPage, onNavigate, children }) {
     return acc
   }, {})
 
+  const headerTitle = currentPath === '/dashboard'
+    ? 'CRH Command Center'
+    : currentPage.label
+
   return (
     <div className="app-shell">
       <aside className="sidebar">
         <div className="brand-card">
           <BrandLogo className="brand-card__logo" compact />
           <div>
-            <strong>MEDICAL PDROZ IPS</strong>
-            <p>Tu salud, nuestro compromiso</p>
+            <strong>CRH Health Intelligence</strong>
+            <p>Core V1 para decisión clínica y financiera</p>
           </div>
         </div>
 
         <div className="sidebar__support">
-          <span className="eyebrow">Cobertura institucional</span>
-          <p>Cali, Popayán, Pasto, Pereira, Florencia y Neiva</p>
+          <span className="eyebrow">Motor de interpretación</span>
+          <p>Paciente 360, contrato PGP 360, riesgo, predicción de consumo y CRH Assist.</p>
         </div>
 
         <nav className="sidebar__nav" aria-label="Principal">
@@ -74,19 +80,20 @@ export function Shell({ currentPath, currentPage, onNavigate, children }) {
           <div className="topbar__identity">
             <BrandLogo compact className="topbar__logo" />
             <div>
-              <span className="eyebrow">Plataforma institucional</span>
-              <h2>{currentPage.label}</h2>
+              <span className="eyebrow">CRH Health Intelligence</span>
+              <h2>{headerTitle}</h2>
             </div>
           </div>
           <div className="topbar__status">
             <span className="status-pill">Demo segura</span>
-            <span className="status-pill status-pill--soft">Preparado para API REST</span>
+            <span className="status-pill status-pill--soft">No conectado a producción</span>
+            <span className="status-pill status-pill--soft">Listo para API REST</span>
           </div>
         </header>
 
         <main className="main-content">{children}</main>
 
-        <nav className="mobile-nav" aria-label="Movil">
+        <nav className="mobile-nav" aria-label="Móvil">
           {navigationItems.map((item) => (
             <button
               key={item.path}

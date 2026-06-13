@@ -1,0 +1,19 @@
+{
+  "name": "crh-health-intelligence-backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "db:check": "node src/db/checkDb.js",
+    "db:migrate": "node src/db/runMigrations.js",
+    "dev": "node --watch src/index.js",
+    "predeploy:check": "node src/db/checkDb.js",
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^4.18.3",
+    "pg": "^8.16.3"
+  }
+}

@@ -27,12 +27,12 @@ export function CitasPage() {
     <div className="page-stack">
       <PageHeader
         eyebrow="Agenda"
-        title="Citas medicas"
-        description="Agenda diaria con estados operativos y filtros preparados para flujos de programacion."
+        title="Agenda asistencial"
+        description="Capa operacional base sobre la que CRH prioriza pacientes, riesgo y oportunidad."
         action={<button className="primary-button">Nueva cita</button>}
       />
 
-      <SectionCard title="Agenda del dia" subtitle="Control visual de citas por sede, especialidad y profesional">
+      <SectionCard title="Agenda del día" subtitle="Control visual de citas por sede, especialidad y profesional">
         <DataTable columns={columns} rows={appointments} />
       </SectionCard>
     </div>
