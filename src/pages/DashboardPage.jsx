@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Badge } from '../components/Badge'
-import { PageHeader } from '../components/PageHeader'
 import { SectionCard } from '../components/SectionCard'
 import { CRH_BRAND } from '../config/brand'
 import {
@@ -176,73 +175,103 @@ export function DashboardPage() {
 
   return (
     <div className="page-stack page-stack--dashboard">
-      <PageHeader
-        eyebrow={CRH_BRAND.name}
-        title={CRH_BRAND.modules.dashboard}
-        description="Visión integral del riesgo clínico, financiero y operativo de la organización."
-        action={(
-          <div className="toolbar-actions">
-            <Badge tone={railwayConnected ? 'success' : 'warning'}>
-              Backend: {railwayConnected ? 'conectado' : 'desconectado'}
-            </Badge>
-            <button className="primary-button">Activar lectura gerencial</button>
-          </div>
-        )}
-      />
+      <section className="command-hero">
+        <article className="command-hero__main">
+          <span className="eyebrow">CRH HEALTH INTELLIGENCE</span>
+          <h1>{CRH_BRAND.modules.dashboard}</h1>
+          <p className="command-hero__description">
+            Visión integral del riesgo clínico, financiero y operativo de la organización.
+          </p>
+          <p className="command-hero__slogan">{CRH_BRAND.slogan}</p>
+        </article>
+
+        <aside className="command-hero__status">
+          <span className={`executive-status executive-status--${railwayConnected ? 'success' : 'warning'}`}>
+            {railwayConnected ? 'Backend conectado' : 'Modo fallback'}
+          </span>
+          <span className={`executive-status executive-status--${railwayConnected ? 'primary' : 'warning'}`}>
+            {railwayConnected ? 'Producción conectada' : 'Producción no disponible'}
+          </span>
+          <span className="executive-status executive-status--dark">
+            Entorno {railwayEnvironment === 'production' ? 'producción' : railwayEnvironment}
+          </span>
+        </aside>
+      </section>
 
       {loading ? <p className="muted-note">Cargando {CRH_BRAND.modules.dashboard}...</p> : null}
       {error ? <p className="muted-note">{error}</p> : null}
-      {!loading ? (
-        <p className="muted-note">
-          {railwayConnected ? 'Producción conectada' : 'Modo fallback'}
-        </p>
-      ) : null}
 
-      <article className="recommendation-card">
-        <span className="eyebrow">Qué debe mirar gerencia</span>
-        <p>
-          {CRH_BRAND.slogan}
-        </p>
-      </article>
+      <section className="dashboard-priority-grid">
+        <article className="recommendation-card recommendation-card--executive">
+          <span className="eyebrow">Qué debe mirar gerencia</span>
+          <h3>El riesgo principal hoy está en el margen PGP, la continuidad terapéutica y la velocidad operativa.</h3>
+          <p>
+            {executiveIntelligenceSummary.projectedOvercost} de sobrecosto proyectado, {executiveIntelligenceSummary.contractsAtRisk} contratos
+            en seguimiento y {executiveIntelligenceSummary.pendingAuthorizations} autorizaciones pendientes que afectan continuidad y costo.
+          </p>
+        </article>
+
+        <article className="organization-card">
+          <span className="eyebrow">Organización</span>
+          <dl className="organization-card__meta">
+            <div>
+              <dt>IPS Demo</dt>
+              <dd>Medical P-DROZ</dd>
+            </div>
+            <div>
+              <dt>Backend</dt>
+              <dd>{railwayConnected ? 'Conectado' : 'Modo fallback'}</dd>
+            </div>
+            <div>
+              <dt>Modo</dt>
+              <dd>{railwayConnected ? 'Producción' : 'Fallback'}</dd>
+            </div>
+            <div>
+              <dt>Última actualización</dt>
+              <dd>Tiempo real</dd>
+            </div>
+          </dl>
+        </article>
+      </section>
 
       <section className="institutional-hero crh-hero">
-        <article className="institutional-hero__brand crh-hero__brand">
+        <article className="institutional-hero__brand crh-hero__brand crh-hero__brand--assist">
           <div className="institutional-hero__copy">
             <span className="eyebrow">{CRH_BRAND.modules.assist}</span>
             <h3>Centro ejecutivo para proteger margen, continuidad y resultado asistencial</h3>
             <p>
-              Paciente - Diagnóstico - Medicamento - Historia Clínica - Contrato PGP - Costo - Riesgo - Acción recomendada.
-              Ese flujo corre sobre un catálogo editable de {crhAssistRulesSummary.enabled} reglas ponderadas listas para crecer sin romper el modo mock.
+              Paciente, diagnóstico, medicamento, historia clínica y contrato PGP se conectan en un solo flujo para
+              anticipar riesgo, reducir desvíos y orientar acciones concretas de la gerencia.
             </p>
           </div>
-          <div className="kpi-strip kpi-strip--4">
+          <div className="kpi-strip kpi-strip--4 kpi-strip--executive">
             <article className="kpi-strip__card kpi-strip__card--danger">
               <span>Pacientes críticos</span>
               <strong>{crhAssistCommandCenter.topPatients.length}</strong>
-              <p>Casos con prioridad inmediata para comité clínico-financiero.</p>
+              <p>Casos con prioridad inmediata.</p>
             </article>
             <article className="kpi-strip__card kpi-strip__card--warning">
               <span>Contratos en riesgo</span>
               <strong>{executiveIntelligenceSummary.contractsAtRisk}</strong>
-              <p>Frentes contractuales con presión de margen y desvío proyectado.</p>
+              <p>Frentes con presión de margen.</p>
             </article>
             <article className="kpi-strip__card kpi-strip__card--primary">
               <span>Prioridad gerencial</span>
               <strong>{executiveIntelligenceSummary.pendingAuthorizations}</strong>
-              <p>Autorizaciones pendientes que hoy pueden afectar continuidad y costo.</p>
+              <p>Autorizaciones que afectan continuidad.</p>
             </article>
             <article className="kpi-strip__card kpi-strip__card--success">
               <span>Margen estimado</span>
               <strong>{dashboardKpis[2]?.value}</strong>
-              <p>{dashboardKpis[2]?.meta}</p>
+              <p>Lectura gerencial consolidada.</p>
             </article>
           </div>
         </article>
 
         <article className="institutional-hero__services institutional-hero__services--premium">
-          <div className="panel-heading">
-            <span className="eyebrow">{CRH_BRAND.category}</span>
-            <p>{CRH_BRAND.slogan}</p>
+          <div className="panel-heading panel-heading--compact">
+            <span className="eyebrow">Lectura ejecutiva</span>
+            <p>Qué está pasando en la IPS, dónde está el riesgo y qué debe priorizar gerencia.</p>
           </div>
           <div className="service-pills service-pills--dashboard">
             {dashboardServiceLines.map((item) => (
@@ -250,9 +279,20 @@ export function DashboardPage() {
             ))}
           </div>
           <div className="coverage-card coverage-card--assist">
-            <span className="eyebrow">Lectura ejecutiva activa</span>
+            <span className="eyebrow">Score CRH Assist</span>
             <strong>{crhAssistCommandCenter.score}/100</strong>
             <p>{crhAssistCommandCenter.criticalAlerts} alertas críticas activas conectan paciente, contrato, farmacia e historia clínica.</p>
+          </div>
+          <div className="assist-panel assist-panel--compact">
+            {crhAssistCommandCenter.topPatients.slice(0, 2).map((patient) => (
+              <article key={patient.patientId} className={`assist-card assist-card--${levelTone(patient.level)}`}>
+                <div className="assist-card__head">
+                  <Badge tone={levelTone(patient.level)}>{patient.name}</Badge>
+                </div>
+                <p>Riesgo detectado: {patient.topAlert}</p>
+                <small>Impacto financiero estimado según score {patient.score}/100.</small>
+              </article>
+            ))}
           </div>
         </article>
       </section>
@@ -322,12 +362,12 @@ export function DashboardPage() {
             <div className="executive-card__head">
               <h3>Infraestructura</h3>
               <Badge tone={railwayConnected ? 'success' : 'warning'}>
-                {railwayConnected ? 'conectado' : 'desconectado'}
+                {railwayConnected ? 'Conectado' : 'Fallback'}
               </Badge>
             </div>
-            <strong className="executive-card__value">Backend: Railway</strong>
+            <strong className="executive-card__value">Backend Railway</strong>
             <p>
-              Entorno: {railwayEnvironment === 'production' ? 'producción' : railwayEnvironment} · Base de datos: {railwayConnected ? railwayDatabaseMode : 'Modo fallback'}
+              Entorno {railwayEnvironment === 'production' ? 'producción' : railwayEnvironment} · Base de datos {railwayConnected ? railwayDatabaseMode : 'modo fallback'}
             </p>
           </article>
         </div>
@@ -376,8 +416,8 @@ export function DashboardPage() {
           <article className="panel">
             <div className="panel__header">
               <div>
-                <h2>Alertas Ejecutivas</h2>
-                <p>Alertas ejecutivas accionables</p>
+                <h2>Alertas ejecutivas</h2>
+                <p>Alertas accionables para proteger margen, continuidad y rentabilidad.</p>
               </div>
             </div>
             <div className="assist-panel">
@@ -395,8 +435,8 @@ export function DashboardPage() {
           <article className="panel">
             <div className="panel__header">
               <div>
-                <h2>Acciones Recomendadas</h2>
-                <p>Acciones recomendadas para gerencia</p>
+                <h2>Acciones recomendadas</h2>
+                <p>Intervenciones de gerencia para reducir pérdida contractual.</p>
               </div>
             </div>
             <div className="assist-panel">

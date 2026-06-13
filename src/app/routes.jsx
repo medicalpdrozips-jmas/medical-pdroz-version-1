@@ -13,23 +13,22 @@ import { LoginPage } from '../pages/LoginPage'
 import { ContratoPgpPage } from '../pages/ContratoPgpPage'
 import { CrhAssistRulesPage } from '../pages/CrhAssistRulesPage'
 import { SystemStatusPage } from '../pages/SystemStatusPage'
-import { CRH_BRAND } from '../config/brand'
 
 export const navigationItems = [
-  { path: '/dashboard', label: CRH_BRAND.modules.dashboard, icon: 'grid', section: 'Núcleo CRH' },
-  { path: '/crh-assist/rules', label: CRH_BRAND.modules.rulesEngine, icon: 'spark', section: 'Núcleo CRH' },
-  { path: '/pacientes', label: CRH_BRAND.modules.patients, icon: 'patient', section: 'Inteligencia clínica' },
-  { path: '/contratos-pgp', label: CRH_BRAND.modules.pgp, icon: 'contract', section: 'Inteligencia financiera' },
-  { path: '/historia-clinica', label: CRH_BRAND.modules.clinicalHistory, icon: 'document', section: 'Inteligencia clínica' },
-  { path: '/medicamentos', label: CRH_BRAND.modules.pharmacy, icon: 'capsule', section: 'Inteligencia financiera' },
-  { path: '/citas', label: 'Agenda', icon: 'calendar', section: 'Operación base' },
-  { path: '/laboratorios', label: 'Laboratorios', icon: 'lab', section: 'Operación base' },
-  { path: '/sedes', label: 'Sedes', icon: 'building', section: 'Red institucional' },
-  { path: '/especialidades', label: 'Especialidades', icon: 'stethoscope', section: 'Red institucional' },
-  { path: '/reportes', label: 'Reportes', icon: 'chart', section: 'Gerencia' },
-  { path: '/usuarios', label: 'Usuarios', icon: 'shield', section: 'Seguridad' },
-  { path: '/configuracion', label: 'Configuración', icon: 'settings', section: 'Seguridad' },
-  { path: '/system-status', label: 'Estado del sistema', icon: 'shield', section: 'Seguridad' },
+  { path: '/dashboard', label: 'Centro de Comando', icon: 'grid', section: 'INTELIGENCIA' },
+  { path: '/crh-assist/rules', label: 'Motor de Reglas', icon: 'spark', section: 'INTELIGENCIA' },
+  { path: '/pacientes', label: 'Pacientes 360', icon: 'patient', section: 'INTELIGENCIA CLÍNICA' },
+  { path: '/historia-clinica', label: 'Historia Clínica', icon: 'document', section: 'INTELIGENCIA CLÍNICA' },
+  { path: '/contratos-pgp', label: 'Contratos PGP 360', icon: 'contract', section: 'INTELIGENCIA FINANCIERA' },
+  { path: '/medicamentos', label: 'Farmacia Inteligente', icon: 'capsule', section: 'INTELIGENCIA FINANCIERA' },
+  { path: '/citas', label: 'Agenda', icon: 'calendar', section: 'OPERACIÓN' },
+  { path: '/laboratorios', label: 'Laboratorios', icon: 'lab', section: 'OPERACIÓN' },
+  { path: '/reportes', label: 'Reportes', icon: 'chart', section: 'PLATAFORMA' },
+  { path: '/usuarios', label: 'Usuarios', icon: 'shield', section: 'PLATAFORMA' },
+  { path: '/configuracion', label: 'Configuración', icon: 'settings', section: 'PLATAFORMA' },
+  { path: '/system-status', label: 'Estado del sistema', icon: 'shield', section: 'PLATAFORMA' },
+  { path: '/sedes', label: 'Sedes', icon: 'building', section: 'PLATAFORMA' },
+  { path: '/especialidades', label: 'Especialidades', icon: 'stethoscope', section: 'PLATAFORMA' },
 ]
 
 export const appRoutes = [

@@ -1,3 +1,6 @@
+import { CRH_BRAND } from '../config/brand'
+import { CrhShieldLogo } from './CrhShieldLogo'
+
 export function BrandLogo({ className = '', compact = false, monochrome = false, showTagline = false }) {
   const modeClass = compact ? 'brand-logo--compact' : ''
   const toneClass = monochrome ? 'brand-logo--mono' : ''
@@ -5,17 +8,14 @@ export function BrandLogo({ className = '', compact = false, monochrome = false,
 
   return (
     <div className={`brand-logo ${modeClass} ${toneClass} ${taglineClass} ${className}`.trim()}>
-      <img
-        className="brand-logo__mark"
-        src="/crh-mark.svg"
-        alt="CRH Health Intelligence"
-      />
+      <CrhShieldLogo className="brand-logo__mark" title={CRH_BRAND.name} />
       <div className="brand-logo__copy">
-        <strong>CRH Health</strong>
-        <span>Intelligence</span>
+        <strong>{CRH_BRAND.name}</strong>
         {showTagline ? (
-          <small>Plataforma Inteligente para IPS</small>
-        ) : null}
+          <small>{CRH_BRAND.slogan}</small>
+        ) : (
+          <span>{CRH_BRAND.category}</span>
+        )}
       </div>
     </div>
   )

@@ -67,29 +67,41 @@ export function Shell({ currentPath, currentPage, onNavigate, children }) {
     return acc
   }, {})
 
-  const headerTitle = currentPath === '/dashboard'
-    ? CRH_BRAND.modules.dashboard
-    : currentPage.label
-
   const railwayEnvironment = runtimeStatus.runtime?.environment ?? 'fallback'
+  const productionLabel = runtimeStatus.connected ? 'Producción' : 'Fallback'
+  const isDashboard = currentPath === '/dashboard'
 
   return (
     <div className="app-shell">
       <aside className="sidebar">
         <div className="brand-card">
           <BrandLogo className="brand-card__logo" compact showTagline />
-          <div className="brand-card__shield">
-            <span className="brand-card__shield-badge">CRH</span>
-            <div className="brand-card__shield-copy">
-              <strong>Escudo Inteligente CRH</strong>
-              <p>{CRH_BRAND.category}</p>
+          <div className="brand-card__organization">
+            <div className="brand-card__organization-head">
+              <span className="brand-card__organization-badge">Organización</span>
+              <strong>{CRH_BRAND.demoClient}</strong>
             </div>
+            <dl className="brand-card__organization-meta">
+              <div>
+                <dt>Backend</dt>
+                <dd>{runtimeStatus.connected ? 'Conectado' : 'Modo fallback'}</dd>
+              </div>
+              <div>
+                <dt>Modo</dt>
+                <dd>{productionLabel}</dd>
+              </div>
+              <div>
+                <dt>Última actualización</dt>
+                <dd>Tiempo real</dd>
+              </div>
+            </dl>
           </div>
         </div>
 
         <div className="sidebar__support">
-          <span className="eyebrow">{CRH_BRAND.demoClient}</span>
-          <p>{CRH_BRAND.slogan}</p>
+          <span className="eyebrow">CRH Assist</span>
+          <p>Centro ejecutivo para proteger margen, continuidad y resultado asistencial.</p>
+          <small>{CRH_BRAND.demoClient}</small>
         </div>
 
         <nav className="sidebar__nav" aria-label="Principal">
@@ -116,28 +128,37 @@ export function Shell({ currentPath, currentPage, onNavigate, children }) {
       </aside>
 
       <div className="content-area">
-        <header className="topbar">
+        <header className={`topbar ${isDashboard ? 'topbar--dashboard' : ''}`}>
           <div className="topbar__identity">
-            <BrandLogo compact className="topbar__logo" />
-            <div>
-              <span className="eyebrow">{CRH_BRAND.name}</span>
-              <h2>{headerTitle}</h2>
-            </div>
+            {isDashboard ? (
+              <div className="topbar__summary">
+                <span className="eyebrow">Visión ejecutiva</span>
+                <h2>Seguimiento institucional en tiempo real</h2>
+              </div>
+            ) : (
+              <>
+                <BrandLogo compact className="topbar__logo" />
+                <div>
+                  <span className="eyebrow">{CRH_BRAND.name}</span>
+                  <h2>{currentPage.label}</h2>
+                </div>
+              </>
+            )}
           </div>
           <div className="topbar__status">
-            <span className="status-pill">Demo ejecutiva</span>
+            <span className="status-pill status-pill--primary">Demo ejecutiva</span>
             <span className="status-pill status-pill--soft">
-              {runtimeStatus.connected ? 'Producción conectada' : 'Modo fallback'}
+              {runtimeStatus.connected ? 'Backend conectado' : 'Modo fallback'}
             </span>
             <span className="status-pill status-pill--soft">
-              Entorno: {railwayEnvironment === 'production' ? 'producción' : railwayEnvironment}
+              Entorno {railwayEnvironment === 'production' ? 'producción' : railwayEnvironment}
             </span>
           </div>
         </header>
 
         <main className="main-content">{children}</main>
 
-        <nav className="mobile-nav" aria-label="Movil">
+        <nav className="mobile-nav" aria-label="Móvil">
           {navigationItems.map((item) => (
             <button
               key={item.path}
