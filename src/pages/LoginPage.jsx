@@ -1,4 +1,5 @@
 import { BrandLogo } from '../components/BrandLogo'
+import { CRH_BRAND } from '../config/brand'
 
 const accessCards = [
   'Acceso seguro por roles y permisos',
@@ -6,35 +7,29 @@ const accessCards = [
   'Operación centralizada por sedes',
 ]
 
-const serviceItems = [
-  'Medicina General',
-  'Especialidades',
-  'Odontología',
-  'Laboratorio Clínico',
-  'Enfermería',
-  'Promoción y Prevención',
-]
+const serviceItems = ['HIS', 'ERP', 'BI', 'AI']
 
 export function LoginPage() {
   return (
     <div className="login-screen">
       <section className="login-screen__panel">
         <div className="login-screen__brand">
-          <BrandLogo className="login-screen__logo" />
-          <p>CRH Health Intelligence para operaciones clínicas, administrativas y gerenciales.</p>
+          <BrandLogo className="login-screen__logo" showTagline />
+          <div className="brand-hero-note">
+            <p>{CRH_BRAND.slogan}</p>
+            <p>{CRH_BRAND.extendedValue}</p>
+          </div>
         </div>
 
         <div className="login-screen__grid">
           <div className="login-card">
-            <span className="eyebrow">Acceso futuro</span>
-            <h1>Ingreso seguro a CRH Health Intelligence</h1>
-            <p>
-              IPS Demo: Medical P-DROZ. Interfaz lista para autenticación posterior sin exponer datos reales.
-            </p>
+            <span className="eyebrow">{CRH_BRAND.category}</span>
+            <h1>{CRH_BRAND.name}</h1>
+            <p>{CRH_BRAND.demoClient}. Interfaz lista para autenticación posterior sin exponer datos reales.</p>
             <div className="login-form">
               <label>
                 <span>Usuario institucional</span>
-                <input className="field" placeholder="usuario@medicalpdrozips.com" />
+                <input className="field" placeholder="usuario@ipsdemo.com" />
               </label>
               <label>
                 <span>Contraseña</span>
@@ -50,7 +45,7 @@ export function LoginPage() {
           <aside className="identity-card">
             <div className="identity-card__hero">
               <BrandLogo compact className="identity-card__hero-logo" />
-              <strong>Plataforma Inteligente HIS + ERP + BI + AI para IPS</strong>
+              <strong>HIS + ERP + BI + AI</strong>
             </div>
             <div className="identity-card__list">
               {accessCards.map((item) => (

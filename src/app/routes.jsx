@@ -13,21 +13,22 @@ import { LoginPage } from '../pages/LoginPage'
 import { ContratoPgpPage } from '../pages/ContratoPgpPage'
 import { CrhAssistRulesPage } from '../pages/CrhAssistRulesPage'
 import { SystemStatusPage } from '../pages/SystemStatusPage'
+import { CRH_BRAND } from '../config/brand'
 
 export const navigationItems = [
-  { path: '/dashboard', label: 'Centro de Comando Inteligente', icon: 'grid', section: 'Núcleo CRH' },
-  { path: '/crh-assist/rules', label: 'Motor de Reglas Inteligente', icon: 'spark', section: 'Núcleo CRH' },
-  { path: '/pacientes', label: 'Pacientes 360', icon: 'patient', section: 'Inteligencia clínica' },
-  { path: '/contratos-pgp', label: 'Contratos PGP', icon: 'contract', section: 'Inteligencia financiera' },
-  { path: '/historia-clinica', label: 'Historia Clínica', icon: 'document', section: 'Inteligencia clínica' },
-  { path: '/medicamentos', label: 'Farmacia Inteligente', icon: 'capsule', section: 'Inteligencia financiera' },
+  { path: '/dashboard', label: CRH_BRAND.modules.dashboard, icon: 'grid', section: 'Núcleo CRH' },
+  { path: '/crh-assist/rules', label: CRH_BRAND.modules.rulesEngine, icon: 'spark', section: 'Núcleo CRH' },
+  { path: '/pacientes', label: CRH_BRAND.modules.patients, icon: 'patient', section: 'Inteligencia clínica' },
+  { path: '/contratos-pgp', label: CRH_BRAND.modules.pgp, icon: 'contract', section: 'Inteligencia financiera' },
+  { path: '/historia-clinica', label: CRH_BRAND.modules.clinicalHistory, icon: 'document', section: 'Inteligencia clínica' },
+  { path: '/medicamentos', label: CRH_BRAND.modules.pharmacy, icon: 'capsule', section: 'Inteligencia financiera' },
   { path: '/citas', label: 'Agenda', icon: 'calendar', section: 'Operación base' },
   { path: '/laboratorios', label: 'Laboratorios', icon: 'lab', section: 'Operación base' },
   { path: '/sedes', label: 'Sedes', icon: 'building', section: 'Red institucional' },
   { path: '/especialidades', label: 'Especialidades', icon: 'stethoscope', section: 'Red institucional' },
   { path: '/reportes', label: 'Reportes', icon: 'chart', section: 'Gerencia' },
   { path: '/usuarios', label: 'Usuarios', icon: 'shield', section: 'Seguridad' },
-  { path: '/configuracion', label: 'Configuracion', icon: 'settings', section: 'Seguridad' },
+  { path: '/configuracion', label: 'Configuración', icon: 'settings', section: 'Seguridad' },
   { path: '/system-status', label: 'Estado del sistema', icon: 'shield', section: 'Seguridad' },
 ]
 

@@ -11,9 +11,9 @@ export default defineConfig({
       manifest: {
         name: 'CRH Health Intelligence',
         short_name: 'CRH Health',
-        description: 'Plataforma inteligente para IPS con lectura clinica, financiera y operativa.',
-        theme_color: '#0D6EFD',
-        background_color: '#F2F4F7',
+        description: 'Protegemos la sostenibilidad clínica, financiera y operativa mediante inteligencia basada en datos.',
+        theme_color: '#0F4C81',
+        background_color: '#F5F7FA',
         display: 'standalone',
         start_url: '/dashboard',
         scope: '/',

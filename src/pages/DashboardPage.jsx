@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Badge } from '../components/Badge'
+import { PageHeader } from '../components/PageHeader'
+import { SectionCard } from '../components/SectionCard'
+import { CRH_BRAND } from '../config/brand'
 import {
   evaluateContractCRHAssist,
   evaluatePatientCRHAssist,
@@ -8,8 +11,6 @@ import {
   getPatients,
   getRuleCatalog,
 } from '../api/crhApiClient'
-import { PageHeader } from '../components/PageHeader'
-import { SectionCard } from '../components/SectionCard'
 import { getApiDbStatus, getRuntimeDiagnostics } from '../services/apiClient'
 import {
   branches,
@@ -84,7 +85,7 @@ export function DashboardPage() {
         setContractEvaluations(contractEvaluationRows)
       } catch {
         if (!active) return
-        setError('No fue posible cargar el Centro de Comando Inteligente.')
+        setError(`No fue posible cargar ${CRH_BRAND.modules.dashboard}.`)
       } finally {
         if (active) {
           setLoading(false)
@@ -176,9 +177,9 @@ export function DashboardPage() {
   return (
     <div className="page-stack page-stack--dashboard">
       <PageHeader
-        eyebrow="CRH Health Intelligence Core V1"
-        title="Centro de Comando Inteligente"
-        description="Visión gerencial inmediata del riesgo clínico, contractual, farmacéutico y operativo para la toma de decisiones en IPS."
+        eyebrow={CRH_BRAND.name}
+        title={CRH_BRAND.modules.dashboard}
+        description="Visión integral del riesgo clínico, financiero y operativo de la organización."
         action={(
           <div className="toolbar-actions">
             <Badge tone={railwayConnected ? 'success' : 'warning'}>
@@ -189,7 +190,7 @@ export function DashboardPage() {
         )}
       />
 
-      {loading ? <p className="muted-note">Cargando Centro de Comando Inteligente...</p> : null}
+      {loading ? <p className="muted-note">Cargando {CRH_BRAND.modules.dashboard}...</p> : null}
       {error ? <p className="muted-note">{error}</p> : null}
       {!loading ? (
         <p className="muted-note">
@@ -198,21 +199,20 @@ export function DashboardPage() {
       ) : null}
 
       <article className="recommendation-card">
-        <span className="eyebrow">Que debe mirar gerencia</span>
+        <span className="eyebrow">Qué debe mirar gerencia</span>
         <p>
-          El principal frente de riesgo hoy esta en el contrato PGP-NUE-2026-01: Laura Burbano y Fredy Cuellar
-          conectan riesgo clinico, presion farmacologica y posible perdida de margen si no se interviene esta semana.
+          {CRH_BRAND.slogan}
         </p>
       </article>
 
       <section className="institutional-hero crh-hero">
         <article className="institutional-hero__brand crh-hero__brand">
           <div className="institutional-hero__copy">
-            <span className="eyebrow">Motor de Reglas Inteligente CRH Assist</span>
-            <h3>El cerebro interpretable y configurable de la plataforma</h3>
+            <span className="eyebrow">{CRH_BRAND.modules.assist}</span>
+            <h3>Centro ejecutivo para proteger margen, continuidad y resultado asistencial</h3>
             <p>
-              Paciente → Diagnóstico → Medicamento → Historia Clínica → Contrato PGP → Costo → Riesgo → Acción recomendada.
-              Ese flujo ahora corre sobre un catálogo editable de {crhAssistRulesSummary.enabled} reglas ponderadas y listas para futura persistencia en API REST/PostgreSQL.
+              Paciente - Diagnóstico - Medicamento - Historia Clínica - Contrato PGP - Costo - Riesgo - Acción recomendada.
+              Ese flujo corre sobre un catálogo editable de {crhAssistRulesSummary.enabled} reglas ponderadas listas para crecer sin romper el modo mock.
             </p>
           </div>
           <div className="kpi-strip kpi-strip--4">
@@ -241,8 +241,8 @@ export function DashboardPage() {
 
         <article className="institutional-hero__services institutional-hero__services--premium">
           <div className="panel-heading">
-            <span className="eyebrow">CRH Assist en producción demo</span>
-            <p>Resultados derivados del motor interpretable, listos para futura API y trazabilidad clínica-financiera.</p>
+            <span className="eyebrow">{CRH_BRAND.category}</span>
+            <p>{CRH_BRAND.slogan}</p>
           </div>
           <div className="service-pills service-pills--dashboard">
             {dashboardServiceLines.map((item) => (
@@ -250,9 +250,9 @@ export function DashboardPage() {
             ))}
           </div>
           <div className="coverage-card coverage-card--assist">
-            <span className="eyebrow">Score promedio CRH Assist</span>
+            <span className="eyebrow">Lectura ejecutiva activa</span>
             <strong>{crhAssistCommandCenter.score}/100</strong>
-            <p>{crhAssistCommandCenter.criticalAlerts} alertas críticas activas en la lectura actual.</p>
+            <p>{crhAssistCommandCenter.criticalAlerts} alertas críticas activas conectan paciente, contrato, farmacia e historia clínica.</p>
           </div>
         </article>
       </section>
@@ -268,17 +268,17 @@ export function DashboardPage() {
       </section>
 
       <SectionCard
-        title="Pulso del Motor de Reglas Inteligente"
+        title={`Pulso del ${CRH_BRAND.modules.rulesEngine}`}
         subtitle="Resumen ejecutivo del motor interpretable, ponderado y configurable"
       >
         <div className="insight-grid">
           <article className="insight-card">
             <h3>Riesgo detectado</h3>
-            <p>El sobrecosto proyectado se concentra en cronicos de alto impacto, con continuidad terapeutica y adherencia inestables.</p>
+            <p>El sobrecosto proyectado se concentra en crónicos de alto impacto, con continuidad terapéutica y adherencia inestables.</p>
           </article>
           <article className="insight-card">
-            <h3>Accion recomendada</h3>
-            <p>Priorizar cierre de autorizaciones, dispensacion y control clinico antes del siguiente ciclo de medicamentos criticos.</p>
+            <h3>Acción recomendada</h3>
+            <p>Priorizar cierre de autorizaciones, dispensación y control clínico antes del siguiente ciclo de medicamentos críticos.</p>
           </article>
           <article className="insight-card">
             <h3>Impacto financiero estimado</h3>
@@ -289,7 +289,7 @@ export function DashboardPage() {
         <div className="executive-grid">
           <article className="executive-card">
             <div className="executive-card__head">
-              <h3>Score CRH Assist</h3>
+              <h3>Score {CRH_BRAND.modules.assist}</h3>
               <Badge tone={levelTone(crhAssistCommandCenter.score > 80 ? 'critico' : crhAssistCommandCenter.score > 60 ? 'alto' : crhAssistCommandCenter.score > 30 ? 'medio' : 'bajo')}>
                 {crhAssistCommandCenter.score}/100
               </Badge>
@@ -334,7 +334,7 @@ export function DashboardPage() {
       </SectionCard>
 
       <SectionCard
-        title="Inteligencia Ejecutiva"
+        title={CRH_BRAND.modules.executive}
         subtitle="Consolidado ejecutivo de riesgo clínico, financiero y operativo sobre los módulos inteligentes"
       >
         <div className="executive-grid">

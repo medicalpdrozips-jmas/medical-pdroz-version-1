@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { navigationItems } from '../app/routes.jsx'
+import { CRH_BRAND } from '../config/brand'
 import { getRuntimeDiagnostics } from '../services/apiClient'
 import { BrandLogo } from './BrandLogo'
 
@@ -67,7 +68,7 @@ export function Shell({ currentPath, currentPage, onNavigate, children }) {
   }, {})
 
   const headerTitle = currentPath === '/dashboard'
-    ? 'Centro de Comando Inteligente'
+    ? CRH_BRAND.modules.dashboard
     : currentPage.label
 
   const railwayEnvironment = runtimeStatus.runtime?.environment ?? 'fallback'
@@ -76,16 +77,19 @@ export function Shell({ currentPath, currentPage, onNavigate, children }) {
     <div className="app-shell">
       <aside className="sidebar">
         <div className="brand-card">
-          <BrandLogo className="brand-card__logo" compact />
-          <div>
-            <strong>CRH Health Intelligence</strong>
-            <p>Plataforma Inteligente HIS + ERP + BI + AI para IPS</p>
+          <BrandLogo className="brand-card__logo" compact showTagline />
+          <div className="brand-card__shield">
+            <span className="brand-card__shield-badge">CRH</span>
+            <div className="brand-card__shield-copy">
+              <strong>Escudo Inteligente CRH</strong>
+              <p>{CRH_BRAND.category}</p>
+            </div>
           </div>
         </div>
 
         <div className="sidebar__support">
-          <span className="eyebrow">IPS Demo: Medical P-DROZ</span>
-          <p>Pacientes 360, Contratos PGP, Farmacia Inteligente, Historia Clínica y CRH Assist sobre una sola plataforma.</p>
+          <span className="eyebrow">{CRH_BRAND.demoClient}</span>
+          <p>{CRH_BRAND.slogan}</p>
         </div>
 
         <nav className="sidebar__nav" aria-label="Principal">
@@ -116,12 +120,12 @@ export function Shell({ currentPath, currentPage, onNavigate, children }) {
           <div className="topbar__identity">
             <BrandLogo compact className="topbar__logo" />
             <div>
-              <span className="eyebrow">CRH Health Intelligence</span>
+              <span className="eyebrow">{CRH_BRAND.name}</span>
               <h2>{headerTitle}</h2>
             </div>
           </div>
           <div className="topbar__status">
-            <span className="status-pill">Demo segura</span>
+            <span className="status-pill">Demo ejecutiva</span>
             <span className="status-pill status-pill--soft">
               {runtimeStatus.connected ? 'Producción conectada' : 'Modo fallback'}
             </span>
