@@ -67,7 +67,7 @@ export function Shell({ currentPath, currentPage, onNavigate, children }) {
   }, {})
 
   const headerTitle = currentPath === '/dashboard'
-    ? 'CRH Centro de Comando Inteligente'
+    ? 'Centro de Comando Inteligente'
     : currentPage.label
 
   const railwayEnvironment = runtimeStatus.runtime?.environment ?? 'fallback'

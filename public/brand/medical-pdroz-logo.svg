@@ -1,33 +1,32 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 240" role="img" aria-labelledby="title desc">
-  <title id="title">MEDICAL PDROZ IPS</title>
-  <desc id="desc">Logo institucional de Medical Pdroz IPS con cruz medica, corazon y estetoscopio.</desc>
+  <title id="title">CRH Health Intelligence</title>
+  <desc id="desc">Marca institucional de CRH Health Intelligence para plataforma inteligente de IPS.</desc>
   <defs>
-    <linearGradient id="blueGradient" x1="0%" x2="100%" y1="0%" y2="100%">
-      <stop offset="0%" stop-color="#0D6EFD"/>
-      <stop offset="100%" stop-color="#0A56C4"/>
+    <linearGradient id="crhBlueText" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#0D6EFD" />
+      <stop offset="100%" stop-color="#0A4FB3" />
     </linearGradient>
-    <linearGradient id="greenGradient" x1="0%" x2="100%" y1="0%" y2="100%">
-      <stop offset="0%" stop-color="#28A745"/>
-      <stop offset="100%" stop-color="#1F8A39"/>
+    <linearGradient id="crhGreenText" x1="0%" x2="100%" y1="100%" y2="0%">
+      <stop offset="0%" stop-color="#1FA971" />
+      <stop offset="100%" stop-color="#11C5A1" />
     </linearGradient>
   </defs>
 
-  <g transform="translate(18 28)">
-    <path fill="url(#blueGradient)" d="M88 0c7.7 0 14 6.3 14 14v42h42c7.7 0 14 6.3 14 14v40c0 7.7-6.3 14-14 14h-42v42c0 7.7-6.3 14-14 14H48c-7.7 0-14-6.3-14-14v-42H-8c-7.7 0-14-6.3-14-14V70c0-7.7 6.3-14 14-14h42V14C34 6.3 40.3 0 48 0h40z" transform="translate(22 10)"/>
-    <path fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="10" d="M34 85h28l12-28 18 59 20-43h32"/>
-    <path fill="url(#greenGradient)" d="M133 65c7 0 12.8 5.6 12.8 12.6 0 5.7-3.5 11.1-9.1 16.7l-2.2 2.1-7.6 7.2-7.6-7.2-2.1-2.1c-5.7-5.6-9.1-11-9.1-16.7 0-7 5.8-12.6 12.8-12.6 4.4 0 8.8 2.2 11.9 5.8 3.1-3.6 7.5-5.8 12.9-5.8z"/>
-    <path fill="none" stroke="url(#greenGradient)" stroke-linecap="round" stroke-linejoin="round" stroke-width="9" d="M125 52c4-12 12-18 24-18 17 0 28 13 28 29 0 27-17 40-17 56v28c0 9-7 16-16 16h-14"/>
-    <circle cx="145" cy="166" r="12" fill="url(#greenGradient)"/>
+  <g transform="translate(24 28)">
+    <rect width="178" height="178" rx="42" fill="#F4F8FF" />
+    <path d="M44 32h46c30 0 49 18 49 46 0 19-10 33-27 41l31 25h-35l-25-19H73v19H44V32zm29 64h16c14 0 21-6 21-17 0-12-7-18-21-18H73v35z" fill="url(#crhBlueText)" />
+    <path d="M53 133c13-23 29-34 50-34 18 0 31 8 45 24" fill="none" stroke="url(#crhGreenText)" stroke-linecap="round" stroke-width="14" />
+    <circle cx="126" cy="74" r="10" fill="#11C5A1" />
   </g>
 
-  <g fill="#0D47A1" font-family="Montserrat, Arial, sans-serif">
-    <text x="216" y="98" font-size="82" font-weight="800" letter-spacing="0.5">MEDICAL</text>
-    <text x="216" y="158" fill="#2E9F43" font-size="70" font-weight="800">PDROZ IPS</text>
+  <g fill="#123D82" font-family="Montserrat, Arial, sans-serif">
+    <text x="246" y="92" font-size="76" font-weight="800">CRH Health</text>
+    <text x="246" y="156" fill="#0D6EFD" font-size="70" font-weight="800">Intelligence</text>
   </g>
 
-  <g transform="translate(214 190)">
-    <text fill="#0D6EFD" font-family="Montserrat, Arial, sans-serif" font-size="27" font-weight="600">Tu salud, </text>
-    <text x="126" fill="#28A745" font-family="Montserrat, Arial, sans-serif" font-size="27" font-weight="700">nuestro compromiso</text>
-    <path d="M398 16h70l11-26 14 51 15-31h42" fill="none" stroke="#0D6EFD" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+  <g transform="translate(248 192)">
+    <text fill="#255BAE" font-family="Montserrat, Arial, sans-serif" font-size="26" font-weight="600">
+      Plataforma Inteligente HIS + ERP + BI + AI para IPS
+    </text>
   </g>
 </svg>

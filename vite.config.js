@@ -7,11 +7,11 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['logo-medical-pdroz.png'],
+      includeAssets: ['crh-mark.svg'],
       manifest: {
-        name: 'MEDICAL PDROZ IPS',
-        short_name: 'MEDICAL PDROZ',
-        description: 'Plataforma clinica y administrativa modular para la gestion integral de IPS.',
+        name: 'CRH Health Intelligence',
+        short_name: 'CRH Health',
+        description: 'Plataforma inteligente para IPS con lectura clinica, financiera y operativa.',
         theme_color: '#0D6EFD',
         background_color: '#F2F4F7',
         display: 'standalone',
@@ -19,15 +19,15 @@ export default defineConfig({
         scope: '/',
         icons: [
           {
-            src: '/logo-medical-pdroz.png',
-            sizes: '512x512',
-            type: 'image/png',
+            src: '/crh-mark.svg',
+            sizes: 'any',
+            type: 'image/svg+xml',
             purpose: 'any',
           },
           {
-            src: '/logo-medical-pdroz.png',
-            sizes: '512x512',
-            type: 'image/png',
+            src: '/crh-mark.svg',
+            sizes: 'any',
+            type: 'image/svg+xml',
             purpose: 'maskable',
           },
         ],
