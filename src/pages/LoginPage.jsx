@@ -3,16 +3,16 @@ import { BrandLogo } from '../components/BrandLogo'
 const accessCards = [
   'Acceso seguro por roles y permisos',
   'Historia clínica electrónica preparada',
-  'Operacion centralizada por sedes',
+  'Operación centralizada por sedes',
 ]
 
 const serviceItems = [
   'Medicina General',
   'Especialidades',
-  'Odontologia',
-  'Laboratorio Clinico',
-  'Enfermeria',
-  'Promocion y Prevencion',
+  'Odontología',
+  'Laboratorio Clínico',
+  'Enfermería',
+  'Promoción y Prevención',
 ]
 
 export function LoginPage() {
@@ -21,15 +21,15 @@ export function LoginPage() {
       <section className="login-screen__panel">
         <div className="login-screen__brand">
           <BrandLogo className="login-screen__logo" />
-          <p>Acceso institucional para módulos clínicos y administrativos.</p>
+          <p>CRH Health Intelligence para operaciones clínicas, administrativas y gerenciales.</p>
         </div>
 
         <div className="login-screen__grid">
           <div className="login-card">
             <span className="eyebrow">Acceso futuro</span>
-            <h1>Ingreso seguro a MEDICAL PDROZ IPS</h1>
+            <h1>Ingreso seguro a CRH Health Intelligence</h1>
             <p>
-              Interfaz visual lista para autenticacion posterior sin exponer datos reales.
+              IPS Demo: Medical P-DROZ. Interfaz lista para autenticación posterior sin exponer datos reales.
             </p>
             <div className="login-form">
               <label>
@@ -37,8 +37,8 @@ export function LoginPage() {
                 <input className="field" placeholder="usuario@medicalpdrozips.com" />
               </label>
               <label>
-              <span>Contraseña</span>
-                <input className="field" type="password" placeholder="••••••••••" />
+                <span>Contraseña</span>
+                <input className="field" type="password" placeholder="**********" />
               </label>
               <div className="login-form__actions">
                 <button className="primary-button" type="button">Ingresar</button>
@@ -50,7 +50,7 @@ export function LoginPage() {
           <aside className="identity-card">
             <div className="identity-card__hero">
               <BrandLogo compact className="identity-card__hero-logo" />
-              <strong>Tu salud, nuestro compromiso</strong>
+              <strong>Plataforma Inteligente HIS + ERP + BI + AI para IPS</strong>
             </div>
             <div className="identity-card__list">
               {accessCards.map((item) => (

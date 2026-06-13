@@ -43,11 +43,13 @@ html,
 body,
 #root {
   min-height: 100%;
+  height: 100%;
 }
 
 body {
   margin: 0;
   min-width: 320px;
+  overflow: hidden;
 }
 
 img {
@@ -153,21 +155,21 @@ dt {
 }
 
 .app-shell {
-  min-height: 100vh;
+  height: 100dvh;
   display: grid;
   grid-template-columns: 308px minmax(0, 1fr);
+  overflow: hidden;
 }
 
 .sidebar {
-  position: sticky;
-  top: 0;
-  height: 100vh;
+  height: 100dvh;
   padding: 22px 18px;
   background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
   border-right: 1px solid rgba(13, 110, 253, 0.08);
   display: flex;
   flex-direction: column;
   gap: 18px;
+  overflow: hidden;
 }
 
 .brand-card,
@@ -220,6 +222,13 @@ dt {
   gap: 10px;
 }
 
+.sidebar__nav {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
 .sidebar__section {
   padding-inline: 10px;
   font-size: 0.72rem;
@@ -268,11 +277,12 @@ dt {
   min-width: 0;
   display: flex;
   flex-direction: column;
+  min-height: 0;
+  height: 100dvh;
+  overflow: hidden;
 }
 
 .topbar {
-  position: sticky;
-  top: 0;
   z-index: 5;
   display: flex;
   justify-content: space-between;
@@ -282,6 +292,7 @@ dt {
   backdrop-filter: blur(18px);
   background: rgba(242, 244, 247, 0.88);
   border-bottom: 1px solid rgba(13, 110, 253, 0.1);
+  flex-shrink: 0;
 }
 
 .topbar__identity {
@@ -334,7 +345,12 @@ dt {
 }
 
 .main-content {
+  flex: 1;
+  min-height: 0;
   padding: 26px 28px 96px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
 }
 
 .page-stack {
@@ -1519,6 +1535,7 @@ textarea::placeholder {
 
 @media (max-width: 920px) {
   .app-shell {
+    height: 100dvh;
     grid-template-columns: 1fr;
   }
 
@@ -1539,8 +1556,6 @@ textarea::placeholder {
   }
 
   .mobile-nav {
-    position: sticky;
-    bottom: 0;
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: minmax(74px, 1fr);
@@ -1551,6 +1566,7 @@ textarea::placeholder {
     backdrop-filter: blur(18px);
     overflow-x: auto;
     scrollbar-width: none;
+    flex-shrink: 0;
   }
 
   .mobile-nav::-webkit-scrollbar {

@@ -333,6 +333,183 @@ export const crhContracts = [
   },
 ]
 
+export const contractIntelligenceById = {
+  'ctr-001': {
+    expectedBudget: '$2.480 M',
+    consumedBudget: '$2.214 M',
+    projectedConsumption: '$2.658 M',
+    deviationPercent: '+7,2%',
+    riskLevel: 'critico',
+    marginStatus: 'Margen comprometido',
+    overrunRisk: 'Alto',
+    concentrationRisk: 'Alto',
+    highCostPatientsRisk: 'Alto',
+    topCostPatients: [
+      { name: 'Laura Burbano', cost: '$18,6 M', share: '18%', diagnosis: 'Artritis reumatoide' },
+      { name: 'Fredy Cuellar', cost: '$6,2 M', share: '11%', diagnosis: 'Diabetes descompensada' },
+      { name: 'Carlos Narvaez', cost: '$5,8 M', share: '9%', diagnosis: 'ERC + hipertension' },
+    ],
+    topCostMedications: [
+      { name: 'Adalimumab', cost: '$94 M', share: '4,2%', type: 'Biologico' },
+      { name: 'Insulina Glargina', cost: '$38 M', share: '1,8%', type: 'Cronico' },
+      { name: 'Metotrexato', cost: '$21 M', share: '1,0%', type: 'Seguimiento' },
+    ],
+    topDiagnoses: [
+      { name: 'Artritis reumatoide activa', cost: '$126 M', share: '28%' },
+      { name: 'Diabetes descompensada', cost: '$74 M', share: '17%' },
+      { name: 'ERC e hipertension', cost: '$49 M', share: '11%' },
+    ],
+    monthlyTrend: [
+      { month: 'Ene', value: '$318 M' },
+      { month: 'Feb', value: '$336 M' },
+      { month: 'Mar', value: '$354 M' },
+      { month: 'Abr', value: '$368 M' },
+      { month: 'May', value: '$401 M' },
+      { month: 'Jun', value: '$437 M' },
+    ],
+    recommendedActions: [
+      'Escalar a comite clinico-financiero los tres pacientes con mayor desviacion acumulada.',
+      'Renegociar continuidad de biologicos contra evidencia documentada de respuesta terapeutica.',
+      'Cerrar brechas de seguimiento diabetologico para contener urgencias evitables en el cierre del trimestre.',
+    ],
+    smartAlerts: [
+      'El contrato cerraria por encima del presupuesto si no se corrige la tendencia de biologicos.',
+      'La concentracion del gasto en menos de 30 pacientes ya presiona el margen PGP.',
+      'Los eventos evitables en cronicos siguen siendo el principal multiplicador de sobrecosto.',
+    ],
+  },
+  'ctr-002': {
+    expectedBudget: '$1.120 M',
+    consumedBudget: '$894 M',
+    projectedConsumption: '$1.018 M',
+    deviationPercent: '+2,1%',
+    riskLevel: 'medio',
+    marginStatus: 'Margen vigilado',
+    overrunRisk: 'Medio',
+    concentrationRisk: 'Alto',
+    highCostPatientsRisk: 'Medio',
+    topCostPatients: [
+      { name: 'Juan David Lasso', cost: '$11,2 M', share: '16%', diagnosis: 'Psoriasis' },
+      { name: 'Natalia Rivera', cost: '$8,1 M', share: '12%', diagnosis: 'Dermatitis atopica severa' },
+      { name: 'Sara Tovar', cost: '$7,8 M', share: '11%', diagnosis: 'Lupus cutaneo' },
+    ],
+    topCostMedications: [
+      { name: 'Secukinumab', cost: '$56 M', share: '6,2%', type: 'Biologico' },
+      { name: 'Dupilumab', cost: '$44 M', share: '4,9%', type: 'Biologico' },
+      { name: 'Tacrolimus topico', cost: '$12 M', share: '1,3%', type: 'Seguimiento' },
+    ],
+    topDiagnoses: [
+      { name: 'Psoriasis severa', cost: '$88 M', share: '25%' },
+      { name: 'Dermatitis atopica', cost: '$61 M', share: '17%' },
+      { name: 'Lupus cutaneo', cost: '$39 M', share: '11%' },
+    ],
+    monthlyTrend: [
+      { month: 'Ene', value: '$126 M' },
+      { month: 'Feb', value: '$131 M' },
+      { month: 'Mar', value: '$142 M' },
+      { month: 'Abr', value: '$154 M' },
+      { month: 'May', value: '$166 M' },
+      { month: 'Jun', value: '$175 M' },
+    ],
+    recommendedActions: [
+      'Vincular respuesta clinica y costo antes de autorizar nuevos ciclos de biologicos.',
+      'Negociar seguimiento mas estricto de los dos farmacos que concentran el gasto dermatologico.',
+      'Auditar continuidad y cambio terapeutico en pacientes con beneficio parcial sostenido.',
+    ],
+    smartAlerts: [
+      'Dos medicamentos concentran mas del 11% del consumo contractual acumulado.',
+      'La desviacion sigue controlable, pero el peso farmacologico puede erosionar el margen.',
+    ],
+  },
+  'ctr-003': {
+    expectedBudget: '$980 M',
+    consumedBudget: '$712 M',
+    projectedConsumption: '$901 M',
+    deviationPercent: '-3,4%',
+    riskLevel: 'bajo',
+    marginStatus: 'Margen saludable',
+    overrunRisk: 'Bajo',
+    concentrationRisk: 'Medio',
+    highCostPatientsRisk: 'Medio',
+    topCostPatients: [
+      { name: 'Mariana Cordoba', cost: '$7,4 M', share: '13%', diagnosis: 'VIH con adherencia variable' },
+      { name: 'Diego Cortes', cost: '$6,8 M', share: '11%', diagnosis: 'VIH + coinfeccion' },
+      { name: 'Paula Ceron', cost: '$6,2 M', share: '10%', diagnosis: 'VIH estable' },
+    ],
+    topCostMedications: [
+      { name: 'Dolutegravir', cost: '$31 M', share: '4,3%', type: 'Antirretroviral' },
+      { name: 'Tenofovir', cost: '$19 M', share: '2,6%', type: 'Antirretroviral' },
+      { name: 'Lamivudina', cost: '$14 M', share: '2,0%', type: 'Antirretroviral' },
+    ],
+    topDiagnoses: [
+      { name: 'VIH con adherencia irregular', cost: '$64 M', share: '18%' },
+      { name: 'VIH + coinfeccion', cost: '$41 M', share: '12%' },
+      { name: 'Seguimiento virologico incompleto', cost: '$29 M', share: '8%' },
+    ],
+    monthlyTrend: [
+      { month: 'Ene', value: '$108 M' },
+      { month: 'Feb', value: '$114 M' },
+      { month: 'Mar', value: '$119 M' },
+      { month: 'Abr', value: '$116 M' },
+      { month: 'May', value: '$124 M' },
+      { month: 'Jun', value: '$131 M' },
+    ],
+    recommendedActions: [
+      'Sostener intervenciones de adherencia para preservar el margen actual.',
+      'Usar este contrato como referencia de control financiero con riesgo clinico contenido.',
+    ],
+    smartAlerts: [
+      'El contrato mantiene comportamiento sano, pero la adherencia sigue siendo el gatillo principal de gasto futuro.',
+    ],
+  },
+  'ctr-004': {
+    expectedBudget: '$860 M',
+    consumedBudget: '$648 M',
+    projectedConsumption: '$826 M',
+    deviationPercent: '+1,4%',
+    riskLevel: 'medio',
+    marginStatus: 'Margen estable con vigilancia',
+    overrunRisk: 'Medio',
+    concentrationRisk: 'Medio',
+    highCostPatientsRisk: 'Medio',
+    topCostPatients: [
+      { name: 'Paola Pena', cost: '$8,4 M', share: '15%', diagnosis: 'Lupus eritematoso' },
+      { name: 'Cesar Becerra', cost: '$7,9 M', share: '13%', diagnosis: 'Artritis psoriasica' },
+      { name: 'Sandra Munoz', cost: '$3,1 M', share: '7%', diagnosis: 'Fibromialgia' },
+    ],
+    topCostMedications: [
+      { name: 'Rituximab', cost: '$49 M', share: '7,6%', type: 'Biologico' },
+      { name: 'Hidroxicloroquina', cost: '$9 M', share: '1,3%', type: 'Seguimiento' },
+      { name: 'Prednisolona', cost: '$3 M', share: '0,4%', type: 'Soporte' },
+    ],
+    topDiagnoses: [
+      { name: 'Lupus eritematoso', cost: '$52 M', share: '19%' },
+      { name: 'Artritis psoriasica', cost: '$46 M', share: '16%' },
+      { name: 'Fibromialgia cronica', cost: '$18 M', share: '6%' },
+    ],
+    monthlyTrend: [
+      { month: 'Ene', value: '$96 M' },
+      { month: 'Feb', value: '$101 M' },
+      { month: 'Mar', value: '$109 M' },
+      { month: 'Abr', value: '$112 M' },
+      { month: 'May', value: '$114 M' },
+      { month: 'Jun', value: '$116 M' },
+    ],
+    recommendedActions: [
+      'Vigilar terapias inmunomoduladoras para evitar escalamiento innecesario del gasto.',
+      'Priorizar auditoria clinica en pacientes con consumo creciente y documentacion limitada.',
+    ],
+    smartAlerts: [
+      'El margen sigue sano, pero la concentracion en inmunomoduladores merece control preventivo.',
+      'El contrato puede perder eficiencia si los casos reumatologicos severos crecen sin seguimiento oportuno.',
+    ],
+  },
+}
+
+export function getContractIntelligence(contractId) {
+  return contractIntelligenceById[contractId] ?? contractIntelligenceById['ctr-001']
+}
+
 export const crhPatient360Profiles = [
   {
     patientId: 'pac-001',
@@ -533,6 +710,47 @@ export const crhClinicalRecords = [
   },
 ]
 
+export const clinicalHistoryIntelligenceById = {
+  'pac-001': {
+    clinicalSummary: 'Paciente con artritis reumatoide activa, adherencia irregular al biologico y evidencia de actividad inflamatoria persistente.',
+    mainDiagnosis: 'M06.9 Artritis reumatoide seropositiva activa',
+    comorbidities: ['Dolor cronico inflamatorio', 'Fatiga funcional', 'Uso cronico de inmunomoduladores'],
+    treatmentPlan: 'Mantener metotrexato, validar continuidad de adalimumab, solicitar reactantes de fase aguda y priorizar control por reumatologia.',
+    evolutionNotes: [
+      'Persisten rigidez matinal y dolor articular con impacto funcional moderado.',
+      'Se documenta dispensacion parcial reciente del biologico con barreras logisticas.',
+      'Pendiente correlacion clinica-laboratorio para decidir continuidad plena del esquema.',
+    ],
+    clinicalRisk: 'Alto',
+    therapeuticFailureRisk: 'Alto',
+    hospitalizationRisk: 'Medio',
+    financialImpactRisk: 'Alto',
+    pendingLabs: ['PCR', 'VSG'],
+    pendingAuthorizations: ['Validacion de continuidad de biologico'],
+    pendingMedicationClaims: ['Adalimumab pendiente de cierre logistico'],
+    careGaps: ['Control integral sin cierre en ultimos 17 dias', 'Brecha de adherencia farmacologica'],
+    crhAssistSuggestions: [
+      'Documentar actividad clinica con escala objetiva antes de la siguiente autorizacion.',
+      'Escalar a gestion de adherencia si no se confirma aplicacion del biologico en 72 horas.',
+      'Conciliar costo farmacologico con respuesta clinica para proteger margen PGP.',
+    ],
+    smartAlerts: [
+      'Actividad inflamatoria persistente con soporte paraclinico incompleto.',
+      'Biologico de alto costo con continuidad operativa en riesgo.',
+      'Brecha de seguimiento puede traducirse en evento evitable y sobrecosto contractual.',
+    ],
+    auditTrace: [
+      { date: '2026-06-10', user: 'Dra. Paula Gomez', action: 'Ajuste terapeutico preliminar', module: 'Historia clinica', impact: 'Riesgo clinico persistente' },
+      { date: '2026-06-11', user: 'Auditoria CRH', action: 'Revision de adherencia y costo', module: 'Auditoria', impact: 'Caso priorizado para seguimiento' },
+      { date: '2026-06-12', user: 'Farmacia central', action: 'Validacion de dispensacion parcial', module: 'Farmacia', impact: 'Continuidad en riesgo' },
+    ],
+  },
+}
+
+export function getClinicalHistoryIntelligence(patientId) {
+  return clinicalHistoryIntelligenceById[patientId] ?? clinicalHistoryIntelligenceById['pac-001']
+}
+
 export const appointments = [
   { id: 'apt-001', fecha: '2026-06-13', hora: '07:30', paciente: 'Laura Burbano', profesional: 'Dra. Paula Gómez', especialidad: 'Reumatología', sede: 'Pasto', estado: 'Programada' },
   { id: 'apt-002', fecha: '2026-06-13', hora: '08:15', paciente: 'Juan David Lasso', profesional: 'Dr. Esteban Mina', especialidad: 'Dermatología', sede: 'Popayán', estado: 'Atendida' },
@@ -625,6 +843,77 @@ export const medications = [
   },
 ]
 
+export const pharmacyIntelligenceById = {
+  'med-001': {
+    currentStock: 12,
+    monthlyConsumption: '$94 M',
+    daysOfCoverage: 18,
+    shortageRisk: 'Alto',
+    contractImpactPercent: '4,2%',
+    monthlyCost: '$3,8 M',
+    annualProjectedCost: '$45,6 M',
+    highCostDrug: true,
+    adherenceRisk: 'Alto',
+    authorizationStatus: 'Pendiente validacion',
+    patientsAssigned: 28,
+    lastClaimGapDays: 11,
+    recommendedAction: 'Asegurar reposicion inmediata y validar continuidad clinica del biologico antes del siguiente ciclo.',
+    smartAlert: 'Cobertura menor a tres semanas en un medicamento que concentra alto impacto financiero del contrato.',
+  },
+  'med-002': {
+    currentStock: 8,
+    monthlyConsumption: '$56 M',
+    daysOfCoverage: 21,
+    shortageRisk: 'Medio',
+    contractImpactPercent: '6,2%',
+    monthlyCost: '$3,1 M',
+    annualProjectedCost: '$37,2 M',
+    highCostDrug: true,
+    adherenceRisk: 'Medio',
+    authorizationStatus: 'Autorizado con seguimiento',
+    patientsAssigned: 17,
+    lastClaimGapDays: 7,
+    recommendedAction: 'Cruzar respuesta terapeutica con consumo acumulado y sostener seguimiento sobre continuidad del esquema.',
+    smartAlert: 'Dosificacion de alto costo con presion creciente sobre el presupuesto dermatologico.',
+  },
+  'med-003': {
+    currentStock: 65,
+    monthlyConsumption: '$31 M',
+    daysOfCoverage: 47,
+    shortageRisk: 'Bajo',
+    contractImpactPercent: '4,3%',
+    monthlyCost: '$0,9 M',
+    annualProjectedCost: '$10,8 M',
+    highCostDrug: false,
+    adherenceRisk: 'Medio',
+    authorizationStatus: 'Activa',
+    patientsAssigned: 64,
+    lastClaimGapDays: 4,
+    recommendedAction: 'Sostener control de adherencia y trazabilidad de reclamo para evitar caidas de continuidad virologica.',
+    smartAlert: 'Buen nivel de cobertura, pero el riesgo principal sigue siendo la no reclamacion oportuna.',
+  },
+  'med-004': {
+    currentStock: 22,
+    monthlyConsumption: '$38 M',
+    daysOfCoverage: 26,
+    shortageRisk: 'Medio',
+    contractImpactPercent: '1,8%',
+    monthlyCost: '$0,7 M',
+    annualProjectedCost: '$8,4 M',
+    highCostDrug: false,
+    adherenceRisk: 'Alto',
+    authorizationStatus: 'Pendiente entrega',
+    patientsAssigned: 49,
+    lastClaimGapDays: 16,
+    recommendedAction: 'Cerrar entrega y seguimiento de reclamacion en menos de 48 horas para evitar descompensaciones evitables.',
+    smartAlert: 'Brecha de reclamo superior a dos semanas en un medicamento clave para cronicos de alto riesgo.',
+  },
+}
+
+export function getPharmacyIntelligence(medicationId) {
+  return pharmacyIntelligenceById[medicationId] ?? pharmacyIntelligenceById['med-001']
+}
+
 export const labs = [
   { orden: 'LAB-2041', fecha: '2026-06-13', paciente: 'Laura Burbano', examen: 'PCR y VSG', estado: 'Pendiente', resultado: 'En proceso', archivo: 'PCR-VSG-demo.pdf', alerta: 'Prioridad media' },
   { orden: 'LAB-2042', fecha: '2026-06-13', paciente: 'Mariana Córdoba', examen: 'Carga viral VIH', estado: 'Critico', resultado: 'Requiere revisión por infectología', archivo: 'carga-viral-demo.pdf', alerta: 'Alerta clínica' },
@@ -675,6 +964,29 @@ export const headquartersNotes = [
   'La capa demo está preparada para futura conexión a PostgreSQL y API REST sin usar datos reales.',
   'La lectura 360 prioriza decisiones gerenciales, clínicas y farmacéuticas sobre población PGP.',
 ]
+
+export const executiveIntelligenceSummary = {
+  clinicalRiskPatients: 4,
+  financialRiskPatients: 3,
+  highCostMedications: 2,
+  contractsAtRisk: 2,
+  projectedOvercost: '$322 M',
+  pendingClinicalActions: 7,
+  pendingAuthorizations: 3,
+  adherenceGaps: 4,
+  hospitalizationRiskCases: 2,
+  pendingClaims: 2,
+  smartExecutiveAlerts: [
+    'PGP-NUE-2026-01 concentra el mayor riesgo de perdida por Laura Burbano y Fredy Cuellar, ambos con brechas activas de continuidad.',
+    'Adalimumab e insulina glargina ya explican el principal frente de sobrecosto evitable en cronicos priorizados.',
+    'Las autorizaciones, reclamaciones y controles pendientes ya afectan continuidad terapeutica, margen y trazabilidad operativa.',
+  ],
+  recommendedExecutiveActions: [
+    'Escalar hoy a comite clinico-financiero los casos Laura Burbano y Fredy Cuellar junto con el contrato PGP-NUE-2026-01.',
+    'Priorizar cierre de autorizaciones y reclamos pendientes en adalimumab e insulina glargina antes del siguiente ciclo de dispensacion.',
+    'Exigir seguimiento semanal sobre hospitalizacion prevenible, adherencia y continuidad terapeutica en cronicos de mayor costo.',
+  ],
+}
 
 export const dashboardServiceLines = [
   'Paciente 360',
@@ -793,6 +1105,121 @@ export const patientConsumptions = {
     costPercentile: 88,
     potentialAvoidableEvent: true,
   },
+}
+
+export const patientIntelligenceById = {
+  'pac-001': {
+    clinicalRiskScore: 91,
+    financialRiskScore: 88,
+    hospitalizationRisk: 76,
+    adherenceScore: 58,
+    expectedMonthlyCost: '$2,4 M',
+    currentMonthlyCost: '$4,2 M',
+    consumptionDeltaLabel: '+75%',
+    consumptionNarrative: 'Caso principal de la demo: el consumo actual esta muy por encima de lo esperado por brecha de adherencia, continuidad irregular de adalimumab y presion directa sobre el contrato PGP-NUE-2026-01.',
+    pendingActions: [
+      { id: 'pac-001-action-1', owner: 'Reumatologia', due: '72 horas', label: 'Cerrar control integral y documentar respuesta clinica a adalimumab.' },
+      { id: 'pac-001-action-2', owner: 'Farmacia', due: 'Hoy', label: 'Validar continuidad de dispensacion de adalimumab y cadena de frio.' },
+      { id: 'pac-001-action-3', owner: 'Enfermeria', due: '48 horas', label: 'Llamada de adherencia y barreras de aplicacion antes del siguiente ciclo.' },
+    ],
+    smartAlerts: [
+      { id: 'pac-001-alert-1', title: 'Sobreconsumo evitable', detail: 'El caso supera en 75% el costo mensual esperado y hoy es el principal detonante individual del contrato PGP-NUE-2026-01.', tone: 'danger' },
+      { id: 'pac-001-alert-2', title: 'Adherencia vulnerable', detail: 'Persisten señales de uso irregular del biologico y control incompleto.', tone: 'warning' },
+      { id: 'pac-001-alert-3', title: 'Hospitalizacion prevenible', detail: 'Si no se corrige la actividad inflamatoria, aumenta el riesgo de urgencia, estancia y perdida contractual.', tone: 'warning' },
+    ],
+  },
+  'pac-002': {
+    clinicalRiskScore: 67,
+    financialRiskScore: 84,
+    hospitalizationRisk: 42,
+    adherenceScore: 71,
+    expectedMonthlyCost: '$2,1 M',
+    currentMonthlyCost: '$3,5 M',
+    consumptionDeltaLabel: '+67%',
+    consumptionNarrative: 'La respuesta clinica parcial no compensa aun el peso financiero de la terapia biologica.',
+    pendingActions: [
+      { id: 'pac-002-action-1', owner: 'Dermatologia', due: '5 dias', label: 'Correlacionar severidad clinica con continuidad de secukinumab.' },
+      { id: 'pac-002-action-2', owner: 'Autorizaciones', due: 'Hoy', label: 'Cerrar autorizacion pendiente para evitar interrupciones o doble tramite.' },
+    ],
+    smartAlerts: [
+      { id: 'pac-002-alert-1', title: 'Presion farmacoeconomica', detail: 'El costo mensual actual supera en 67% el esperado para el caso.', tone: 'danger' },
+      { id: 'pac-002-alert-2', title: 'Beneficio clinico parcial', detail: 'La respuesta documentada sigue siendo incompleta para el costo comprometido.', tone: 'warning' },
+    ],
+  },
+  'pac-003': {
+    clinicalRiskScore: 86,
+    financialRiskScore: 62,
+    hospitalizationRisk: 64,
+    adherenceScore: 61,
+    expectedMonthlyCost: '$1,6 M',
+    currentMonthlyCost: '$1,8 M',
+    consumptionDeltaLabel: '+13%',
+    consumptionNarrative: 'El costo esta cerca de lo esperado, pero una falla de adherencia puede disparar consumo evitable.',
+    pendingActions: [
+      { id: 'pac-003-action-1', owner: 'Infectologia', due: '7 dias', label: 'Confirmar carga viral y ajustar plan de seguimiento.' },
+      { id: 'pac-003-action-2', owner: 'Enfermeria', due: '48 horas', label: 'Intervencion de adherencia y recordatorio de laboratorio.' },
+    ],
+    smartAlerts: [
+      { id: 'pac-003-alert-1', title: 'Riesgo virologico', detail: 'La adherencia irregular puede deteriorar control clinico y elevar consumo futuro.', tone: 'warning' },
+      { id: 'pac-003-alert-2', title: 'Brecha de laboratorio', detail: 'Sin validacion de carga viral vigente no se puede cerrar el ciclo de control.', tone: 'primary' },
+    ],
+  },
+  'pac-004': {
+    clinicalRiskScore: 59,
+    financialRiskScore: 54,
+    hospitalizationRisk: 37,
+    adherenceScore: 82,
+    expectedMonthlyCost: '$1,0 M',
+    currentMonthlyCost: '$1,1 M',
+    consumptionDeltaLabel: '+10%',
+    consumptionNarrative: 'Caso estable, con ligera desviacion por seguimiento renal pendiente.',
+    pendingActions: [
+      { id: 'pac-004-action-1', owner: 'Medicina interna', due: '15 dias', label: 'Cerrar control renal y repetir microalbuminuria.' },
+    ],
+    smartAlerts: [
+      { id: 'pac-004-alert-1', title: 'Seguimiento renal pendiente', detail: 'La principal oportunidad es sostener continuidad y evitar deterioro silencioso.', tone: 'primary' },
+    ],
+  },
+  'pac-005': {
+    clinicalRiskScore: 46,
+    financialRiskScore: 33,
+    hospitalizationRisk: 22,
+    adherenceScore: 85,
+    expectedMonthlyCost: '$0,9 M',
+    currentMonthlyCost: '$0,7 M',
+    consumptionDeltaLabel: '-22%',
+    consumptionNarrative: 'Consumo por debajo de lo esperado, con comportamiento conservador y baja presion financiera.',
+    pendingActions: [
+      { id: 'pac-005-action-1', owner: 'Reumatologia', due: '10 dias', label: 'Documentar mejor funcionalidad y respuesta al manejo no farmacologico.' },
+    ],
+    smartAlerts: [
+      { id: 'pac-005-alert-1', title: 'Oportunidad documental', detail: 'La principal mejora viene por calidad de registro y trazabilidad funcional.', tone: 'primary' },
+    ],
+  },
+  'pac-006': {
+    clinicalRiskScore: 84,
+    financialRiskScore: 66,
+    hospitalizationRisk: 81,
+    adherenceScore: 49,
+    expectedMonthlyCost: '$1,0 M',
+    currentMonthlyCost: '$1,6 M',
+    consumptionDeltaLabel: '+60%',
+    consumptionNarrative: 'Caso secundario de la demo: la falta de control y continuidad de insulina glargina ya muestra una desviacion importante frente a lo esperado en el mismo contrato cronico.',
+    pendingActions: [
+      { id: 'pac-006-action-1', owner: 'Medicina interna', due: '5 dias', label: 'Cerrar consulta de ajuste terapeutico y HbA1c pendiente.' },
+      { id: 'pac-006-action-2', owner: 'Farmacia', due: 'Hoy', label: 'Confirmar entrega de insulina glargina y educacion de uso.' },
+      { id: 'pac-006-action-3', owner: 'Enfermeria', due: '24 horas', label: 'Seguimiento telefonico por riesgo de descompensacion.' },
+    ],
+    smartAlerts: [
+      { id: 'pac-006-alert-1', title: 'Riesgo alto de hospitalizacion', detail: 'La combinacion de descontrol glucemico y baja adherencia eleva el riesgo inmediato.', tone: 'danger' },
+      { id: 'pac-006-alert-2', title: 'Consumo creciente', detail: 'El costo actual supera en 60% el esperado y amenaza el margen del contrato PGP-NUE-2026-01.', tone: 'warning' },
+      { id: 'pac-006-alert-3', title: 'Brecha operativa critica', detail: 'Consulta perdida y laboratorio pendiente mantienen el caso abierto y expuesto.', tone: 'danger' },
+    ],
+  },
+}
+
+export function getPatientIntelligence(patientId) {
+  return patientIntelligenceById[patientId] ?? patientIntelligenceById['pac-001']
 }
 
 export function getPatient360Profile(patientId) {

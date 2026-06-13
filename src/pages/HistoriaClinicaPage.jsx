@@ -3,10 +3,11 @@ import { evaluatePatientCRHAssist, getPatientClinicalContext, getPatients } from
 import { Badge } from '../components/Badge'
 import { PageHeader } from '../components/PageHeader'
 import { SectionCard } from '../components/SectionCard'
+import { getClinicalHistoryIntelligence } from '../data/demoData'
 
 function levelTone(level) {
-  if (level === 'critico' || level === 'alto') return 'danger'
-  if (level === 'medio') return 'warning'
+  if (level === 'critico' || level === 'alto' || level === 'Alto') return 'danger'
+  if (level === 'medio' || level === 'Medio') return 'warning'
   return 'success'
 }
 
@@ -56,7 +57,7 @@ export function HistoriaClinicaPage() {
         setAssist(assistData)
       } catch {
         if (!active) return
-        setError('No fue posible cargar la historia clinica inteligente.')
+        setError('No fue posible cargar la Historia Clínica Inteligente.')
       } finally {
         if (active) {
           setLoading(false)
@@ -72,85 +73,207 @@ export function HistoriaClinicaPage() {
   }, [])
 
   const record = context?.clinicalRecord
+  const intelligence = patient ? getClinicalHistoryIntelligence(patient.id) : null
 
   return (
     <div className="page-stack">
       <PageHeader
-        eyebrow="Historia clinica inteligente"
-        title="Historia clinica inteligente"
-        description="Base clinica interpretada por CRH Assist para detectar alertas, consistencia diagnostica y presion financiera asociada."
+        eyebrow="Historia Clínica"
+        title="Historia Clínica"
+        description="Historia clínica asistida por inteligencia con resumen, alertas, recomendaciones y trazabilidad legal y auditoría."
       />
 
-      <div className="confidential-banner">Informacion clinica confidencial</div>
-      {loading ? <p className="muted-note">Cargando historia clinica...</p> : null}
+      <div className="confidential-banner">Información clínica confidencial</div>
+      {loading ? <p className="muted-note">Cargando historia clínica...</p> : null}
       {error ? <p className="muted-note">{error}</p> : null}
 
       <section className="crh-360-layout crh-360-layout--history">
         <SectionCard
-          title={patient ? `Caso clinico demo · ${patient.nombres} ${patient.apellidos}` : 'Caso clinico demo'}
-          subtitle="Anamnesis, antecedentes, signos vitales, diagnostico CIE10, plan y ordenes"
+          title={patient ? `Caso clínico demo · ${patient.nombres} ${patient.apellidos}` : 'Caso clínico demo'}
+          subtitle="Módulo clínico-operativo con análisis asistido, alertas y trazabilidad"
         >
-          {patient && record && assist ? (
+          {patient && record && assist && intelligence ? (
             <div className="patient-360">
               <div className="patient-360__chips">
                 <Badge tone={levelTone(assist.level)}>CRH Assist {assist.score}/100</Badge>
-                <Badge tone={levelTone(assist.clinicalRisk?.level ?? 'bajo')}>Riesgo clinico {assist.clinicalRisk?.score ?? 0}/100</Badge>
-                <Badge tone={levelTone(assist.financialRisk?.level ?? 'bajo')}>Riesgo financiero {assist.financialRisk?.score ?? 0}/100</Badge>
+                <Badge tone={levelTone(intelligence.clinicalRisk)}>Riesgo clínico {intelligence.clinicalRisk}</Badge>
+                <Badge tone={levelTone(intelligence.financialImpactRisk)}>Impacto financiero {intelligence.financialImpactRisk}</Badge>
+              </div>
+
+              <article className="recommendation-card">
+                <span className="eyebrow">Resumen clínico inteligente</span>
+                <p>{intelligence.clinicalSummary}</p>
+              </article>
+
+              <article className="recommendation-card">
+                <span className="eyebrow">Que interpreta CRH Assist</span>
+                <p>
+                  La historia muestra actividad inflamatoria persistente, continuidad operativa fragil y riesgo de
+                  sobrecosto evitable. Por eso el caso de Laura Burbano se convierte en una prioridad clinica,
+                  financiera y de auditoria.
+                </p>
+              </article>
+
+              <div className="insight-grid">
+                <article className="insight-card">
+                  <h3>Diagnóstico principal</h3>
+                  <p>{intelligence.mainDiagnosis}</p>
+                </article>
+                <article className="insight-card">
+                  <h3>Comorbilidades</h3>
+                  <ul className="clean-list">
+                    {intelligence.comorbidities.map((item) => <li key={item}>{item}</li>)}
+                  </ul>
+                </article>
+              </div>
+
+              <div className="insight-grid">
+                <article className="insight-card">
+                  <h3>Plan terapéutico</h3>
+                  <p>{intelligence.treatmentPlan}</p>
+                </article>
+                <article className="insight-card">
+                  <h3>Riesgo clínico</h3>
+                  <p>{intelligence.clinicalRisk}</p>
+                </article>
               </div>
 
               <article className="insight-card">
-                <h3>Anamnesis</h3>
-                <p>{record.anamnesis}</p>
+                <h3>Notas de evolución</h3>
+                <ul className="clean-list">
+                  {intelligence.evolutionNotes.map((item) => <li key={item}>{item}</li>)}
+                </ul>
+              </article>
+
+              <div className="risk-summary-grid">
+                <article className="metric-card">
+                  <span>Riesgo de falla terapéutica</span>
+                  <strong>{intelligence.therapeuticFailureRisk}</strong>
+                </article>
+                <article className="metric-card">
+                  <span>Riesgo de hospitalización</span>
+                  <strong>{intelligence.hospitalizationRisk}</strong>
+                </article>
+                <article className="metric-card">
+                  <span>Impacto financiero probable</span>
+                  <strong>{intelligence.financialImpactRisk}</strong>
+                </article>
+                <article className="metric-card">
+                  <span>Brechas de atención</span>
+                  <strong>{intelligence.careGaps.length}</strong>
+                </article>
+              </div>
+
+              <div className="insight-grid">
+                <article className="insight-card">
+                  <h3>Acciones clínicas pendientes</h3>
+                  <div className="compact-stack">
+                    <div className="compact-row">
+                      <div>
+                        <strong>Laboratorios pendientes</strong>
+                        <p>{intelligence.pendingLabs.join(', ')}</p>
+                      </div>
+                      <span>{intelligence.pendingLabs.length}</span>
+                    </div>
+                    <div className="compact-row">
+                      <div>
+                        <strong>Autorizaciones pendientes</strong>
+                        <p>{intelligence.pendingAuthorizations.join(', ')}</p>
+                      </div>
+                      <span>{intelligence.pendingAuthorizations.length}</span>
+                    </div>
+                    <div className="compact-row">
+                      <div>
+                        <strong>Medicamentos pendientes</strong>
+                        <p>{intelligence.pendingMedicationClaims.join(', ')}</p>
+                      </div>
+                      <span>{intelligence.pendingMedicationClaims.length}</span>
+                    </div>
+                    <div className="compact-row">
+                      <div>
+                        <strong>Controles pendientes</strong>
+                        <p>{intelligence.careGaps.join(', ')}</p>
+                      </div>
+                      <span>{intelligence.careGaps.length}</span>
+                    </div>
+                  </div>
+                </article>
+
+                <article className="insight-card">
+                  <h3>Análisis clínico CRH Assist</h3>
+                  <p>{assist.explanation}</p>
+                  <ul className="clean-list">
+                    <li>Falla terapéutica: {intelligence.therapeuticFailureRisk}</li>
+                    <li>Hospitalización: {intelligence.hospitalizationRisk}</li>
+                    <li>Impacto financiero: {intelligence.financialImpactRisk}</li>
+                    <li>Brechas activas: {intelligence.careGaps.length}</li>
+                  </ul>
+                </article>
+              </div>
+
+              <article className="insight-card">
+                <h3>Sugerencias CRH Assist</h3>
+                <ul className="clean-list">
+                  {intelligence.crhAssistSuggestions.map((item) => <li key={item}>{item}</li>)}
+                </ul>
               </article>
 
               <article className="insight-card">
-                <h3>Antecedentes</h3>
-                <p>{record.antecedentes}</p>
-              </article>
-
-              <article className="insight-card">
-                <h3>Signos vitales</h3>
-                <div className="vital-grid">
-                  {(record.signosVitales ?? []).map((vital) => (
-                    <div key={vital.label} className="vital-card">
-                      <span>{vital.label}</span>
-                      <strong>{vital.value}</strong>
+                <h3>Trazabilidad de auditoría</h3>
+                <div className="compact-stack">
+                  {intelligence.auditTrace.map((item) => (
+                    <div key={`${item.date}-${item.user}-${item.action}`} className="compact-row">
+                      <div>
+                        <strong>{item.date} · {item.user}</strong>
+                        <p>{item.action} · {item.module}</p>
+                      </div>
+                      <span>{item.impact}</span>
                     </div>
                   ))}
                 </div>
               </article>
 
-              <div className="insight-grid">
-                <article className="insight-card">
-                  <h3>Diagnostico CIE10</h3>
-                  <p>{record.diagnosticoCie10}</p>
-                </article>
-                <article className="insight-card">
-                  <h3>Plan de manejo</h3>
-                  <p>{record.planManejo}</p>
-                </article>
-              </div>
-
               <article className="insight-card">
-                <h3>Ordenes</h3>
-                <ul className="clean-list">
-                  {(record.ordenes ?? []).map((item) => <li key={item}>{item}</li>)}
-                </ul>
-              </article>
-
-              <article className="recommendation-card">
-                <span className="eyebrow">Explicacion del motor</span>
-                <p>{assist.explanation}</p>
+                <h3>Soporte clínico base</h3>
+                <div className="compact-stack">
+                  <div className="compact-row">
+                    <div>
+                      <strong>Anamnesis</strong>
+                      <p>{record.anamnesis}</p>
+                    </div>
+                  </div>
+                  <div className="compact-row">
+                    <div>
+                      <strong>Antecedentes</strong>
+                      <p>{record.antecedentes}</p>
+                    </div>
+                  </div>
+                  <div className="compact-row">
+                    <div>
+                      <strong>Diagnóstico CIE10</strong>
+                      <p>{record.diagnosticoCie10}</p>
+                    </div>
+                  </div>
+                </div>
               </article>
             </div>
           ) : (
-            <p className="muted-note">No hay un caso clinico disponible para mostrar.</p>
+            <p className="muted-note">No hay un caso clínico disponible para mostrar.</p>
           )}
         </SectionCard>
 
-        <SectionCard title="CRH Assist" subtitle="Interpretacion clinica y financiera del registro">
-          {assist ? (
+        <SectionCard title="Alertas inteligentes" subtitle="Alertas clínicas accionables">
+          {assist && intelligence ? (
             <div className="assist-panel">
+              {intelligence.smartAlerts.map((item) => (
+                <article key={item} className={`assist-card assist-card--${levelTone(intelligence.clinicalRisk)}`}>
+                  <div className="assist-card__head">
+                    <Badge tone={levelTone(intelligence.clinicalRisk)}>Alerta clínica</Badge>
+                  </div>
+                  <p>{item}</p>
+                </article>
+              ))}
+
               {(assist.alerts ?? []).map((item) => {
                 const level = severityToLevel(item.severity)
 
@@ -166,18 +289,9 @@ export function HistoriaClinicaPage() {
                   </article>
                 )
               })}
-
-              <article className="assist-card assist-card--primary">
-                <div className="assist-card__head">
-                  <Badge tone="primary">Acciones recomendadas</Badge>
-                </div>
-                <ul className="clean-list">
-                  {(assist.recommendedActions ?? []).map((action) => <li key={action}>{action}</li>)}
-                </ul>
-              </article>
             </div>
           ) : (
-            <p className="muted-note">La interpretacion CRH Assist aparecera aqui cuando el caso este listo.</p>
+            <p className="muted-note">La interpretación CRH Assist aparecerá aquí cuando el caso esté listo.</p>
           )}
         </SectionCard>
       </section>

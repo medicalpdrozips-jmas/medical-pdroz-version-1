@@ -6,7 +6,7 @@ export function BrandLogo({ className = '', compact = false, monochrome = false 
     <img
       className={`brand-logo ${modeClass} ${toneClass} ${className}`.trim()}
       src="/logo-medical-pdroz.png"
-      alt="MEDICAL P-DROZ"
+      alt="CRH Health Intelligence"
     />
   )
 }

@@ -3,10 +3,11 @@ import { evaluateContractCRHAssist, getContracts, getRuleCatalog } from '../api/
 import { Badge } from '../components/Badge'
 import { PageHeader } from '../components/PageHeader'
 import { SectionCard } from '../components/SectionCard'
+import { getContractIntelligence } from '../data/demoData'
 
 function riskTone(risk) {
-  if (risk === 'Rojo' || risk === 'critico' || risk === 'alto') return 'danger'
-  if (risk === 'Amarillo' || risk === 'medio') return 'warning'
+  if (risk === 'Rojo' || risk === 'critico' || risk === 'alto' || risk === 'Alto') return 'danger'
+  if (risk === 'Amarillo' || risk === 'medio' || risk === 'Medio') return 'warning'
   return 'success'
 }
 
@@ -66,13 +67,14 @@ export function ContratoPgpPage() {
   }
   const contract = contracts.find((item) => item.id === selectedId) ?? contracts[0] ?? null
   const assist = contract ? assistByContractId[contract.id] : null
+  const intelligence = contract ? getContractIntelligence(contract.id) : null
 
   return (
     <div className="page-stack">
       <PageHeader
         eyebrow="Contrato PGP 360"
-        title="Contrato PGP 360"
-        description="Vision clinica y financiera del contrato: consumo, proyeccion, margen, concentracion de pacientes y peso farmaceutico."
+        title="Contratos PGP"
+        description="Lectura ejecutiva del contrato para entender valor contratado, costo ejecutado, desviación, riesgo de pérdida y oportunidades de intervención."
         action={<button className="primary-button">Generar lectura contractual</button>}
       />
 
@@ -80,7 +82,7 @@ export function ContratoPgpPage() {
       {error ? <p className="muted-note">{error}</p> : null}
 
       <section className="crh-360-layout crh-360-layout--contract">
-        <SectionCard title="Contratos priorizados" subtitle="Selecciona el contrato para abrir su lectura 360">
+        <SectionCard title="Contratos priorizados" subtitle="Selecciona el contrato para abrir su ficha de riesgo contractual">
           <div className="patient-selector">
             {contracts.map((item) => {
               const itemAssist = assistByContractId[item.id]
@@ -106,8 +108,8 @@ export function ContratoPgpPage() {
           </div>
         </SectionCard>
 
-        <SectionCard title={contract?.nombre ?? 'Contrato PGP'} subtitle="Modalidad PGP con lectura prospectiva de costo y margen">
-          {contract && assist ? (
+        <SectionCard title={contract?.nombre ?? 'Contrato PGP'} subtitle="Módulo de inteligencia financiera, costo ejecutado y riesgo contractual">
+          {contract && assist && intelligence ? (
             <div className="patient-360">
               <div className="contract-header">
                 <div>
@@ -115,7 +117,7 @@ export function ContratoPgpPage() {
                   <strong>{contract.eps}</strong>
                 </div>
                 <div>
-                  <span className="eyebrow">Codigo contrato</span>
+                  <span className="eyebrow">Código contrato</span>
                   <strong>{contract.codigo}</strong>
                 </div>
                 <div>
@@ -123,103 +125,166 @@ export function ContratoPgpPage() {
                   <strong>{contract.modalidad}</strong>
                 </div>
                 <div>
-                  <span className="eyebrow">Semaforo de riesgo</span>
-                  <Badge tone={riskTone(contract.riesgo)}>{contract.riesgo}</Badge>
+                  <span className="eyebrow">Semáforo de riesgo</span>
+                  <Badge tone={riskTone(intelligence.riskLevel)}>{intelligence.marginStatus}</Badge>
                 </div>
               </div>
 
+              <div className="patient-360__chips">
+                <Badge tone={riskTone(intelligence.riskLevel)}>Riesgo {intelligence.riskLevel}</Badge>
+                <Badge tone={riskTone(contract.riesgo)}>Margen {intelligence.marginStatus}</Badge>
+                <Badge tone={riskTone(assist.level)}>CRH Assist {assist.score}/100</Badge>
+              </div>
+
+              <article className="recommendation-card">
+                <span className="eyebrow">Que debe mirar gerencia</span>
+                <p>
+                  {contract.codigo} concentra el mayor riesgo de perdida en cronicos de alto costo. Laura Burbano y
+                  Fredy Cuellar lideran el desvio, mientras adalimumab e insulina glargina explican el principal
+                  impacto farmacologico evitable.
+                </p>
+              </article>
+
               <div className="risk-summary-grid">
                 <article className="metric-card">
-                  <span>CRH Assist Score</span>
-                  <strong>{assist.score}/100</strong>
+                  <span>Presupuesto esperado</span>
+                  <strong>{intelligence.expectedBudget}</strong>
                 </article>
+                <article className="metric-card">
+                  <span>Consumido</span>
+                  <strong>{intelligence.consumedBudget}</strong>
+                </article>
+                <article className="metric-card">
+                  <span>Proyección de cierre</span>
+                  <strong>{intelligence.projectedConsumption}</strong>
+                </article>
+                <article className="metric-card">
+                  <span>Desviación</span>
+                  <strong>{intelligence.deviationPercent}</strong>
+                </article>
+                <article className="metric-card">
+                  <span>Estado de margen</span>
+                  <strong>{intelligence.marginStatus}</strong>
+                </article>
+              </div>
+
+              <div className="risk-summary-grid">
                 <article className="metric-card">
                   <span>Nivel de riesgo</span>
-                  <strong>{assist.level}</strong>
+                  <strong>{intelligence.riskLevel}</strong>
                 </article>
                 <article className="metric-card">
-                  <span>Alertas criticas</span>
+                  <span>Riesgo de sobrecosto</span>
+                  <strong>{intelligence.overrunRisk}</strong>
+                </article>
+                <article className="metric-card">
+                  <span>Riesgo de concentración</span>
+                  <strong>{intelligence.concentrationRisk}</strong>
+                </article>
+                <article className="metric-card">
+                  <span>Riesgo por pacientes de alto costo</span>
+                  <strong>{intelligence.highCostPatientsRisk}</strong>
+                </article>
+                <article className="metric-card">
+                  <span>Alertas críticas</span>
                   <strong>{assist.criticalAlerts}</strong>
-                </article>
-                <article className="metric-card">
-                  <span>Margen estimado</span>
-                  <strong>{contract.margenEstimado}</strong>
-                </article>
-              </div>
-
-              <div className="risk-summary-grid">
-                <article className="metric-card">
-                  <span>Reglas activas</span>
-                  <strong>{crhAssistRulesSummary.enabled}</strong>
-                </article>
-                <article className="metric-card">
-                  <span>Categorias activas</span>
-                  <strong>{crhAssistRulesSummary.categories.length}</strong>
-                </article>
-                <article className="metric-card">
-                  <span>Version del motor</span>
-                  <strong>V2</strong>
-                </article>
-                <article className="metric-card">
-                  <span>Catalogo</span>
-                  <strong>Ponderado</strong>
-                </article>
-              </div>
-
-              <div className="stats-grid stats-grid--compact">
-                <article className="metric-card">
-                  <span>Valor contrato</span>
-                  <strong>{contract.valorContrato}</strong>
-                </article>
-                <article className="metric-card">
-                  <span>Consumo actual</span>
-                  <strong>{contract.consumoActual}</strong>
-                </article>
-                <article className="metric-card">
-                  <span>Proyeccion cierre</span>
-                  <strong>{contract.proyeccionCierre}</strong>
-                </article>
-                <article className="metric-card">
-                  <span>Desviacion</span>
-                  <strong>{contract.desviacion}</strong>
                 </article>
               </div>
 
               <div className="insight-grid">
                 <article className="insight-card">
-                  <h3>Pacientes que mas consumen</h3>
+                  <h3>Pacientes de mayor costo</h3>
                   <div className="compact-stack">
-                    {(contract.pacientesTop ?? []).map((item) => (
-                      <div key={item.paciente} className="compact-row">
+                    {intelligence.topCostPatients.map((item) => (
+                      <div key={item.name} className="compact-row">
                         <div>
-                          <strong>{item.paciente}</strong>
-                          <p>{item.diagnostico}</p>
+                          <strong>{item.name}</strong>
+                          <p>{item.diagnosis} · participación {item.share}</p>
                         </div>
-                        <span>{item.costo}</span>
+                        <span>{item.cost}</span>
                       </div>
                     ))}
                   </div>
                 </article>
 
                 <article className="insight-card">
-                  <h3>Medicamentos que mas pesan</h3>
+                  <h3>Medicamentos de mayor costo</h3>
                   <div className="compact-stack">
-                    {(contract.medicamentosTop ?? []).map((item) => (
-                      <div key={item.medicamento} className="compact-row">
+                    {intelligence.topCostMedications.map((item) => (
+                      <div key={item.name} className="compact-row">
                         <div>
-                          <strong>{item.medicamento}</strong>
-                          <p>Impacto {item.impacto}</p>
+                          <strong>{item.name}</strong>
+                          <p>{item.type} · impacto {item.share}</p>
                         </div>
-                        <span>{item.costo}</span>
+                        <span>{item.cost}</span>
                       </div>
                     ))}
                   </div>
                 </article>
               </div>
 
+              <div className="insight-grid">
+                <article className="insight-card">
+                  <h3>Diagnósticos de mayor costo</h3>
+                  <div className="compact-stack">
+                    {intelligence.topDiagnoses.map((item) => (
+                      <div key={item.name} className="compact-row">
+                        <div>
+                          <strong>{item.name}</strong>
+                          <p>Participación {item.share}</p>
+                        </div>
+                        <span>{item.cost}</span>
+                      </div>
+                    ))}
+                  </div>
+                </article>
+
+                <article className="insight-card">
+                  <h3>Panel de proyección</h3>
+                  <div className="compact-stack">
+                    <div className="compact-row">
+                      <div>
+                        <strong>Si continúa la tendencia actual</strong>
+                        <p>Consumo proyectado al cierre</p>
+                      </div>
+                      <span>{intelligence.projectedConsumption}</span>
+                    </div>
+                    <div className="compact-row">
+                      <div>
+                        <strong>Sobrecosto esperado</strong>
+                        <p>Brecha frente al presupuesto esperado</p>
+                      </div>
+                      <span>{intelligence.deviationPercent}</span>
+                    </div>
+                    <div className="compact-row">
+                      <div>
+                        <strong>Margen estimado</strong>
+                        <p>Lectura gerencial del cierre proyectado</p>
+                      </div>
+                      <span>{contract.margenEstimado}</span>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
               <article className="recommendation-card">
-                <span className="eyebrow">Explicacion del riesgo</span>
+                <span className="eyebrow">Resumen ejecutivo contractual</span>
                 <p>{assist.explanation}</p>
+              </article>
+
+              <article className="insight-card">
+                <h3>Tendencia mensual</h3>
+                <div className="compact-stack">
+                  {intelligence.monthlyTrend.map((item) => (
+                    <div key={item.month} className="compact-row">
+                      <div>
+                        <strong>{item.month}</strong>
+                        <p>Consumo observado del período</p>
+                      </div>
+                      <span>{item.value}</span>
+                    </div>
+                  ))}
+                </div>
               </article>
             </div>
           ) : (
@@ -227,34 +292,51 @@ export function ContratoPgpPage() {
           )}
         </SectionCard>
 
-        <SectionCard title="CRH Assist" subtitle="Interpretacion automatica del contrato PGP">
-          {contract && assist ? (
+        <SectionCard title="Alertas inteligentes" subtitle="Alertas accionables para gerencia">
+          {contract && assist && intelligence ? (
             <div className="assist-panel">
-              <article className={`assist-card assist-card--${riskTone(assist.level)}`}>
-                <div className="assist-card__head">
-                  <Badge tone={riskTone(assist.level)}>Resultado del motor</Badge>
-                </div>
-                <p>Score {assist.score}/100 con nivel {assist.level}. {assist.explanation}</p>
-              </article>
-
-              <article className="assist-card assist-card--primary">
-                <div className="assist-card__head">
-                  <Badge tone="primary">Catalogo configurable</Badge>
-                </div>
-                <p>La lectura contractual ya usa un conjunto editable de {crhAssistRulesSummary.enabled} reglas ponderadas, listo para persistencia y administracion posterior.</p>
-              </article>
-
-              {(contract.alertas ?? []).map((alert) => (
-                <article key={alert} className={`assist-card assist-card--${riskTone(contract.riesgo)}`}>
+              {intelligence.smartAlerts.map((alert) => (
+                <article key={alert} className={`assist-card assist-card--${riskTone(intelligence.riskLevel)}`}>
                   <div className="assist-card__head">
-                    <Badge tone={riskTone(contract.riesgo)}>Alerta contractual</Badge>
+                    <Badge tone={riskTone(intelligence.riskLevel)}>Alerta gerencial</Badge>
                   </div>
                   <p>{alert}</p>
                 </article>
               ))}
             </div>
           ) : (
-            <p className="muted-note">La interpretacion automatica aparecera aqui cuando el contrato este listo.</p>
+            <p className="muted-note">Las alertas inteligentes aparecerán aquí cuando el contrato esté listo.</p>
+          )}
+        </SectionCard>
+
+        <SectionCard title="Acciones recomendadas" subtitle="Acciones recomendadas para evitar pérdida contractual">
+          {contract && assist && intelligence ? (
+            <div className="assist-panel">
+              <article className={`assist-card assist-card--${riskTone(assist.level)}`}>
+                <div className="assist-card__head">
+                  <Badge tone={riskTone(assist.level)}>Panel de riesgo contractual</Badge>
+                </div>
+                <p>Score {assist.score}/100 con nivel {assist.level}. {assist.explanation}</p>
+              </article>
+
+              <article className="assist-card assist-card--primary">
+                <div className="assist-card__head">
+                  <Badge tone="primary">Catálogo configurable</Badge>
+                </div>
+                <p>La lectura contractual ya usa un conjunto editable de {crhAssistRulesSummary.enabled} reglas ponderadas y {crhAssistRulesSummary.categories.length} categorías activas.</p>
+              </article>
+
+              {intelligence.recommendedActions.map((action) => (
+                <article key={action} className="assist-card assist-card--primary">
+                  <div className="assist-card__head">
+                    <Badge tone="primary">Acción recomendada</Badge>
+                  </div>
+                  <p>{action}</p>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <p className="muted-note">La interpretación automática aparecerá aquí cuando el contrato esté listo.</p>
           )}
         </SectionCard>
       </section>

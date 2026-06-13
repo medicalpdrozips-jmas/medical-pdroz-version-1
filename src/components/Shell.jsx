@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react'
 import { navigationItems } from '../app/routes.jsx'
+import { getRuntimeDiagnostics } from '../services/apiClient'
 import { BrandLogo } from './BrandLogo'
 
 const iconPaths = {
@@ -26,6 +28,38 @@ function NavIcon({ name }) {
 }
 
 export function Shell({ currentPath, currentPage, onNavigate, children }) {
+  const [runtimeStatus, setRuntimeStatus] = useState({
+    connected: false,
+    runtime: null,
+  })
+
+  useEffect(() => {
+    let active = true
+
+    async function loadRuntimeStatus() {
+      try {
+        const diagnostics = await getRuntimeDiagnostics()
+
+        if (!active) return
+
+        setRuntimeStatus(diagnostics)
+      } catch {
+        if (!active) return
+
+        setRuntimeStatus({
+          connected: false,
+          runtime: null,
+        })
+      }
+    }
+
+    loadRuntimeStatus()
+
+    return () => {
+      active = false
+    }
+  }, [])
+
   const grouped = navigationItems.reduce((acc, item) => {
     acc[item.section] ??= []
     acc[item.section].push(item)
@@ -33,8 +67,10 @@ export function Shell({ currentPath, currentPage, onNavigate, children }) {
   }, {})
 
   const headerTitle = currentPath === '/dashboard'
-    ? 'CRH Command Center'
+    ? 'CRH Centro de Comando Inteligente'
     : currentPage.label
+
+  const railwayEnvironment = runtimeStatus.runtime?.environment ?? 'fallback'
 
   return (
     <div className="app-shell">
@@ -43,13 +79,13 @@ export function Shell({ currentPath, currentPage, onNavigate, children }) {
           <BrandLogo className="brand-card__logo" compact />
           <div>
             <strong>CRH Health Intelligence</strong>
-            <p>Core V1 para decisión clínica y financiera</p>
+            <p>Plataforma Inteligente HIS + ERP + BI + AI para IPS</p>
           </div>
         </div>
 
         <div className="sidebar__support">
-          <span className="eyebrow">Motor de interpretación</span>
-          <p>Paciente 360, contrato PGP 360, riesgo, predicción de consumo y CRH Assist.</p>
+          <span className="eyebrow">IPS Demo: Medical P-DROZ</span>
+          <p>Pacientes 360, Contratos PGP, Farmacia Inteligente, Historia Clínica y CRH Assist sobre una sola plataforma.</p>
         </div>
 
         <nav className="sidebar__nav" aria-label="Principal">
@@ -86,14 +122,18 @@ export function Shell({ currentPath, currentPage, onNavigate, children }) {
           </div>
           <div className="topbar__status">
             <span className="status-pill">Demo segura</span>
-            <span className="status-pill status-pill--soft">No conectado a producción</span>
-            <span className="status-pill status-pill--soft">Listo para API REST</span>
+            <span className="status-pill status-pill--soft">
+              {runtimeStatus.connected ? 'Producción conectada' : 'Modo fallback'}
+            </span>
+            <span className="status-pill status-pill--soft">
+              Entorno: {railwayEnvironment === 'production' ? 'producción' : railwayEnvironment}
+            </span>
           </div>
         </header>
 
         <main className="main-content">{children}</main>
 
-        <nav className="mobile-nav" aria-label="Móvil">
+        <nav className="mobile-nav" aria-label="Movil">
           {navigationItems.map((item) => (
             <button
               key={item.path}

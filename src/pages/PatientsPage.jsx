@@ -10,10 +10,17 @@ import {
 import { Badge } from '../components/Badge'
 import { PageHeader } from '../components/PageHeader'
 import { SectionCard } from '../components/SectionCard'
+import { getPatientIntelligence } from '../data/demoData'
 
 function riskTone(risk) {
   if (risk === 'Alto') return 'danger'
   if (risk === 'Medio') return 'warning'
+  return 'success'
+}
+
+function scoreTone(score) {
+  if (score >= 80) return 'danger'
+  if (score >= 60) return 'warning'
   return 'success'
 }
 
@@ -88,7 +95,7 @@ export function PatientsPage() {
         setSelectedId((currentId) => currentId ?? patientsData[0]?.id ?? null)
       } catch {
         if (!active) return
-        setError('No fue posible cargar Paciente 360.')
+        setError('No fue posible cargar Pacientes 360.')
       } finally {
         if (active) {
           setLoading(false)
@@ -117,6 +124,7 @@ export function PatientsPage() {
   const profile = context?.profile
   const assist = activePatient ? assistByPatientId[activePatient.id] : null
   const contract = profile?.contratoId ? contractById[profile.contratoId] : null
+  const patientIntelligence = activePatient ? getPatientIntelligence(activePatient.id) : null
   const crhAssistRulesSummary = {
     categories: Array.from(new Set(ruleCatalog.map((rule) => rule.category))),
   }
@@ -125,18 +133,18 @@ export function PatientsPage() {
     <div className="page-stack">
       <PageHeader
         eyebrow="Paciente 360"
-        title="Paciente 360"
-        description="Una sola vista para entender historia clinica, costo, contrato asociado, riesgo y proxima accion recomendada."
+        title="Pacientes 360"
+        description="Ficha inteligente del paciente con lectura clínica, financiera, de adherencia, consumo y trazabilidad operativa."
         action={<button className="primary-button">Abrir caso priorizado</button>}
       />
 
-      <SectionCard title="Busqueda y priorizacion" subtitle="Preparado para futura conexion a filtros clinicos, contratos y riesgo">
+      <SectionCard title="Búsqueda y priorización" subtitle="Selecciona un paciente para abrir su ficha inteligente y su trazabilidad de riesgo">
         <div className="filters-grid filters-grid--crh">
           <input
             className="field"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Buscar por nombre, documento o diagnostico"
+            placeholder="Buscar por nombre, documento o diagnóstico"
           />
           <select className="field" defaultValue="all">
             <option value="all">Todos los riesgos</option>
@@ -153,7 +161,7 @@ export function PatientsPage() {
           <select className="field" defaultValue="all">
             <option value="all">Todas las sedes</option>
             <option>Cali</option>
-            <option>Popayan</option>
+            <option>Popayán</option>
             <option>Pasto</option>
             <option>Pereira</option>
             <option>Florencia</option>
@@ -165,7 +173,7 @@ export function PatientsPage() {
       </SectionCard>
 
       <section className="crh-360-layout">
-        <SectionCard title="Pacientes priorizados" subtitle="Selecciona un caso para abrir su lectura 360">
+        <SectionCard title="Pacientes priorizados" subtitle="Casos con mayor combinación de riesgo, costo y necesidad de intervención">
           <div className="patient-selector">
             {filteredPatients.map((patient) => {
               const patientAssist = assistByPatientId[patient.id]
@@ -192,8 +200,8 @@ export function PatientsPage() {
           {!loading && filteredPatients.length === 0 ? <p className="muted-note">No hay pacientes para ese filtro.</p> : null}
         </SectionCard>
 
-        <SectionCard title="Paciente 360" subtitle="Vista integrada de clinica, contrato, costo y recomendacion">
-          {activePatient && context && profile && assist ? (
+        <SectionCard title="Ficha inteligente del paciente" subtitle="Vista integrada de riesgo clínico, riesgo financiero, adherencia, consumo y alertas">
+          {activePatient && context && profile && assist && patientIntelligence ? (
             <div className="patient-360">
               <div className="patient-360__identity">
                 <div className="avatar-chip">{activePatient.nombres?.[0]}{activePatient.apellidos?.[0]}</div>
@@ -204,11 +212,20 @@ export function PatientsPage() {
               </div>
 
               <div className="patient-360__chips">
-                <Badge tone={riskTone(profile.riesgoClinico)}>Riesgo clinico {profile.riesgoClinico}</Badge>
+                <Badge tone={riskTone(profile.riesgoClinico)}>Riesgo clínico {profile.riesgoClinico}</Badge>
                 <Badge tone={riskTone(profile.riesgoFinanciero)}>Riesgo financiero {profile.riesgoFinanciero}</Badge>
                 <Badge tone="primary">{profile.contratoNombre}</Badge>
                 <Badge tone={levelTone(assist.level)}>CRH Assist {assist.score}/100</Badge>
               </div>
+
+              <article className="recommendation-card">
+                <span className="eyebrow">Riesgo detectado</span>
+                <p>
+                  {activePatient.nombres} {activePatient.apellidos} explica una parte material del riesgo del contrato
+                  {` ${profile.contratoNombre}`}. La prioridad es sostener continuidad terapeutica, documentar respuesta
+                  clinica y cerrar la brecha de adherencia antes del siguiente ciclo.
+                </p>
+              </article>
 
               <dl className="detail-grid detail-grid--triple">
                 <div><dt>EPS</dt><dd>{profile.eps}</dd></div>
@@ -221,45 +238,66 @@ export function PatientsPage() {
 
               <div className="risk-summary-grid">
                 <article className="metric-card">
-                  <span>Score CRH Assist</span>
-                  <strong>{assist.score}/100</strong>
-                </article>
-                <article className="metric-card">
-                  <span>Nivel de riesgo</span>
-                  <strong>{assist.level}</strong>
-                </article>
-                <article className="metric-card">
-                  <span>Riesgo clinico</span>
-                  <strong>{assist.clinicalRisk?.score ?? 0}/100</strong>
+                  <span>Riesgo clínico</span>
+                  <strong>{patientIntelligence.clinicalRiskScore}/100</strong>
+                  <Badge tone={scoreTone(patientIntelligence.clinicalRiskScore)}>
+                    {patientIntelligence.clinicalRiskScore >= 80 ? 'Intervención alta' : patientIntelligence.clinicalRiskScore >= 60 ? 'Seguimiento activo' : 'Controlado'}
+                  </Badge>
                 </article>
                 <article className="metric-card">
                   <span>Riesgo financiero</span>
-                  <strong>{assist.financialRisk?.score ?? 0}/100</strong>
+                  <strong>{patientIntelligence.financialRiskScore}/100</strong>
+                  <Badge tone={scoreTone(patientIntelligence.financialRiskScore)}>
+                    {patientIntelligence.financialRiskScore >= 80 ? 'Presión contractual' : patientIntelligence.financialRiskScore >= 60 ? 'Vigilar margen' : 'Baja presión'}
+                  </Badge>
+                </article>
+                <article className="metric-card">
+                  <span>Riesgo de hospitalización</span>
+                  <strong>{patientIntelligence.hospitalizationRisk}%</strong>
+                  <Badge tone={scoreTone(patientIntelligence.hospitalizationRisk)}>
+                    {patientIntelligence.hospitalizationRisk >= 70 ? 'Prevenible hoy' : patientIntelligence.hospitalizationRisk >= 50 ? 'Riesgo moderado' : 'Bajo'}
+                  </Badge>
+                </article>
+                <article className="metric-card">
+                  <span>Adherencia</span>
+                  <strong>{patientIntelligence.adherenceScore}/100</strong>
+                  <Badge tone={patientIntelligence.adherenceScore < 60 ? 'danger' : patientIntelligence.adherenceScore < 80 ? 'warning' : 'success'}>
+                    {patientIntelligence.adherenceScore < 60 ? 'Brecha activa' : patientIntelligence.adherenceScore < 80 ? 'Parcial' : 'Estable'}
+                  </Badge>
                 </article>
               </div>
 
               <div className="risk-summary-grid">
                 <article className="metric-card">
-                  <span>Version del motor</span>
-                  <strong>{assist.rulesVersion}</strong>
+                  <span>Consumo vs esperado</span>
+                  <strong>{patientIntelligence.consumptionDeltaLabel}</strong>
+                  <p>{patientIntelligence.currentMonthlyCost} actual · {patientIntelligence.expectedMonthlyCost} esperado</p>
                 </article>
                 <article className="metric-card">
-                  <span>Reglas activas</span>
+                  <span>Score CRH Assist</span>
+                  <strong>{assist.score}/100</strong>
+                  <p>{assist.explanation}</p>
+                </article>
+                <article className="metric-card">
+                  <span>Motor y reglas</span>
                   <strong>{assist.enabledRules}</strong>
-                </article>
-                <article className="metric-card">
-                  <span>Catalogo V2</span>
-                  <strong>{crhAssistRulesSummary.categories.length} categorias</strong>
+                  <p>{assist.rulesVersion} · {crhAssistRulesSummary.categories.length} categorías</p>
                 </article>
                 <article className="metric-card">
                   <span>Alertas activas</span>
-                  <strong>{assist.alerts?.length ?? 0}</strong>
+                  <strong>{(assist.alerts?.length ?? 0) + patientIntelligence.smartAlerts.length}</strong>
+                  <p>{patientIntelligence.pendingActions.length} acciones pendientes priorizadas</p>
                 </article>
               </div>
 
+              <article className="recommendation-card">
+                <span className="eyebrow">Consumo vs esperado</span>
+                <p>{patientIntelligence.consumptionNarrative}</p>
+              </article>
+
               <div className="insight-grid">
                 <article className="insight-card">
-                  <h3>Diagnosticos principales</h3>
+                  <h3>Diagnósticos principales</h3>
                   <ul className="clean-list">
                     {(profile.diagnosticosPrincipales ?? []).map((item) => <li key={item}>{item}</li>)}
                   </ul>
@@ -278,7 +316,7 @@ export function PatientsPage() {
               </div>
 
               <article className="insight-card">
-                <h3>Ultimas atenciones</h3>
+                <h3>Trazabilidad del paciente</h3>
                 <div className="compact-stack">
                   {(profile.ultimasAtenciones ?? []).map((event) => (
                     <div key={`${event.fecha}-${event.servicio}`} className="compact-row">
@@ -292,17 +330,43 @@ export function PatientsPage() {
                 </div>
               </article>
 
-              <article className="recommendation-card">
-                <span className="eyebrow">Explicacion del riesgo</span>
-                <p>{assist.explanation}</p>
-              </article>
+              <div className="insight-grid">
+                <article className="insight-card">
+                  <h3>Acciones pendientes</h3>
+                  <div className="compact-stack">
+                    {patientIntelligence.pendingActions.map((action) => (
+                      <div key={action.id} className="compact-row">
+                        <div>
+                          <strong>{action.label}</strong>
+                          <p>{action.owner}</p>
+                        </div>
+                        <span>{action.due}</span>
+                      </div>
+                    ))}
+                  </div>
+                </article>
+
+                <article className="insight-card">
+                  <h3>Alertas inteligentes</h3>
+                  <div className="assist-panel">
+                    {patientIntelligence.smartAlerts.map((alert) => (
+                      <article key={alert.id} className={`assist-card assist-card--${alert.tone}`}>
+                        <div className="assist-card__head">
+                          <Badge tone={alert.tone}>{alert.title}</Badge>
+                        </div>
+                        <p>{alert.detail}</p>
+                      </article>
+                    ))}
+                  </div>
+                </article>
+              </div>
             </div>
           ) : (
             <p className="muted-note">Selecciona un paciente para abrir la lectura 360.</p>
           )}
         </SectionCard>
 
-        <SectionCard title="CRH Assist" subtitle="Alertas automaticas, explicacion y acciones recomendadas">
+        <SectionCard title="Motor de Reglas Inteligente" subtitle="Alertas automáticas, explicación y acciones recomendadas para el caso">
           {assist ? (
             <div className="assist-panel">
               {(assist.alerts ?? []).map((alert) => (
@@ -321,7 +385,7 @@ export function PatientsPage() {
                 <div className="assist-card__head">
                   <Badge tone="primary">Motor configurable</Badge>
                 </div>
-                <p>El score actual usa {assist.enabledRules} reglas ponderadas del catalogo V2. Cada regla puede persistirse luego en PostgreSQL y administrarse desde backend.</p>
+                <p>El score actual usa {assist.enabledRules} reglas ponderadas del catálogo V2. Cada regla puede persistirse luego en PostgreSQL y administrarse desde backend.</p>
               </article>
 
               <article className="assist-card assist-card--primary">
@@ -334,7 +398,7 @@ export function PatientsPage() {
               </article>
             </div>
           ) : (
-            <p className="muted-note">La lectura CRH Assist aparecera aqui cuando el caso este listo.</p>
+            <p className="muted-note">La lectura CRH Assist aparecerá aquí cuando el caso esté listo.</p>
           )}
         </SectionCard>
       </section>

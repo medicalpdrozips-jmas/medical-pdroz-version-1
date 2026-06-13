@@ -12,21 +12,23 @@ import { ConfiguracionPage } from '../pages/ConfiguracionPage'
 import { LoginPage } from '../pages/LoginPage'
 import { ContratoPgpPage } from '../pages/ContratoPgpPage'
 import { CrhAssistRulesPage } from '../pages/CrhAssistRulesPage'
+import { SystemStatusPage } from '../pages/SystemStatusPage'
 
 export const navigationItems = [
-  { path: '/dashboard', label: 'Command Center', icon: 'grid', section: 'CRH Core' },
-  { path: '/crh-assist/rules', label: 'CRH Assist Rules', icon: 'spark', section: 'CRH Core' },
-  { path: '/pacientes', label: 'Paciente 360', icon: 'patient', section: 'Inteligencia clínica' },
-  { path: '/contratos-pgp', label: 'Contrato PGP 360', icon: 'contract', section: 'Inteligencia financiera' },
-  { path: '/historia-clinica', label: 'Historia inteligente', icon: 'document', section: 'Inteligencia clínica' },
-  { path: '/medicamentos', label: 'Farmacia inteligente', icon: 'capsule', section: 'Inteligencia financiera' },
+  { path: '/dashboard', label: 'Centro de Comando Inteligente', icon: 'grid', section: 'Núcleo CRH' },
+  { path: '/crh-assist/rules', label: 'Motor de Reglas Inteligente', icon: 'spark', section: 'Núcleo CRH' },
+  { path: '/pacientes', label: 'Pacientes 360', icon: 'patient', section: 'Inteligencia clínica' },
+  { path: '/contratos-pgp', label: 'Contratos PGP', icon: 'contract', section: 'Inteligencia financiera' },
+  { path: '/historia-clinica', label: 'Historia Clínica', icon: 'document', section: 'Inteligencia clínica' },
+  { path: '/medicamentos', label: 'Farmacia Inteligente', icon: 'capsule', section: 'Inteligencia financiera' },
   { path: '/citas', label: 'Agenda', icon: 'calendar', section: 'Operación base' },
   { path: '/laboratorios', label: 'Laboratorios', icon: 'lab', section: 'Operación base' },
   { path: '/sedes', label: 'Sedes', icon: 'building', section: 'Red institucional' },
   { path: '/especialidades', label: 'Especialidades', icon: 'stethoscope', section: 'Red institucional' },
   { path: '/reportes', label: 'Reportes', icon: 'chart', section: 'Gerencia' },
   { path: '/usuarios', label: 'Usuarios', icon: 'shield', section: 'Seguridad' },
-  { path: '/configuracion', label: 'Configuración', icon: 'settings', section: 'Seguridad' },
+  { path: '/configuracion', label: 'Configuracion', icon: 'settings', section: 'Seguridad' },
+  { path: '/system-status', label: 'Estado del sistema', icon: 'shield', section: 'Seguridad' },
 ]
 
 export const appRoutes = [
@@ -44,6 +46,7 @@ export const appRoutes = [
   { path: '/reportes', element: <ReportesPage /> },
   { path: '/usuarios', element: <UsuariosPage /> },
   { path: '/configuracion', element: <ConfiguracionPage /> },
+  { path: '/system-status', element: <SystemStatusPage /> },
 ]
 
 export function getPageMeta(pathname) {

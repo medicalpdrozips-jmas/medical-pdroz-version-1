@@ -29,7 +29,7 @@ export function CrhAssistRulesPage() {
         setRulesCatalog(rulesData)
       } catch {
         if (!active) return
-        setError('No fue posible cargar el catalogo de reglas.')
+        setError('No fue posible cargar el catálogo de reglas.')
       } finally {
         if (active) {
           setLoading(false)
@@ -72,13 +72,13 @@ export function CrhAssistRulesPage() {
   return (
     <div className="page-stack">
       <PageHeader
-        eyebrow="CRH Assist Rules"
-        title="Catalogo de reglas interpretable"
-        description="Motor V2 con reglas configurables, pesos ponderados y estructura preparada para futura persistencia en PostgreSQL y administracion desde API."
-        action={<button className="primary-button">Exportar catalogo</button>}
+        eyebrow="Motor de Reglas Inteligente"
+        title="Motor de Reglas Inteligente"
+        description="Catálogo interpretable de CRH Assist con reglas configurables, pesos ponderados y estructura preparada para futura administración desde API."
+        action={<button className="primary-button">Exportar catálogo</button>}
       />
 
-      {loading ? <p className="muted-note">Cargando catalogo de reglas...</p> : null}
+      {loading ? <p className="muted-note">Cargando catálogo de reglas...</p> : null}
       {error ? <p className="muted-note">{error}</p> : null}
 
       <section className="stats-grid stats-grid--compact">
@@ -91,7 +91,7 @@ export function CrhAssistRulesPage() {
           <strong>{crhAssistRulesSummary.enabled}</strong>
         </article>
         <article className="metric-card">
-          <span>Categorias</span>
+          <span>Categorías</span>
           <strong>{crhAssistRulesSummary.categories.length}</strong>
         </article>
         <article className="metric-card">
@@ -101,10 +101,18 @@ export function CrhAssistRulesPage() {
       </section>
 
       <SectionCard
-        title="Motor configurable V2"
-        subtitle="Cada regla aporta al score segun su peso y puede ser administrada luego desde backend"
+        title="Motor de Reglas Inteligente V2"
+        subtitle="Cada regla aporta al score según su peso y puede ser administrada luego desde backend"
       >
-        <p className="muted-note">Frontend ↔ Backend Bridge activo con fallback automatico al mock.</p>
+        <p className="muted-note">Puente Frontend ↔ Backend activo con fallback automático al mock.</p>
+        <article className="recommendation-card">
+          <span className="eyebrow">Como contarlo en demo</span>
+          <p>
+            CRH Assist no reemplaza el criterio clinico. Toma senales de paciente, historia, contrato y farmacia para
+            explicar por que Laura Burbano, Fredy Cuellar y el contrato PGP-NUE-2026-01 aparecen hoy como prioridad.
+          </p>
+        </article>
+
         <div className="service-pills service-pills--dashboard">
           {crhAssistRulesSummary.categories.map((category) => (
             <span key={category} className="service-pill service-pill--filled">{category}</span>
@@ -113,8 +121,8 @@ export function CrhAssistRulesPage() {
       </SectionCard>
 
       <SectionCard
-        title="Catalogo de reglas"
-        subtitle="Vista editable conceptual para el futuro modulo de administracion CRH Assist"
+        title="Catálogo de reglas"
+        subtitle="Vista editable conceptual para el futuro módulo de administración CRH Assist"
       >
         <div className="rules-catalog">
           {rulesCatalog.map((rule) => (
@@ -137,7 +145,7 @@ export function CrhAssistRulesPage() {
 
               <dl className="detail-grid detail-grid--triple">
                 <div>
-                  <dt>Modulo relacionado</dt>
+                  <dt>Módulo relacionado</dt>
                   <dd>{rule.relatedModule}</dd>
                 </div>
                 <div>
@@ -145,13 +153,13 @@ export function CrhAssistRulesPage() {
                   <dd>{(rule.appliesTo ?? []).join(', ')}</dd>
                 </div>
                 <div>
-                  <dt>Condicion</dt>
+                  <dt>Condición</dt>
                   <dd>{rule.condition?.metric} {rule.condition?.operator} {String(rule.condition?.threshold)}</dd>
                 </div>
               </dl>
 
               <article className="recommendation-card recommendation-card--soft">
-                <span className="eyebrow">Accion recomendada</span>
+                <span className="eyebrow">Acción recomendada</span>
                 <p>{rule.recommendedAction}</p>
               </article>
 
