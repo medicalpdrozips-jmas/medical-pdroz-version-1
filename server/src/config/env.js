@@ -51,6 +51,10 @@ export function getEnvironmentWarnings() {
 }
 
 export function getCorsMode() {
+  if (env.NODE_ENV === 'production' && env.CORS_ORIGIN === '*') {
+    return 'wildcard'
+  }
+
   return env.NODE_ENV === 'production'
     ? 'configured-origin'
     : 'development-localhost'

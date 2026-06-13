@@ -26,6 +26,11 @@ export function createApp() {
       }
 
       if (env.NODE_ENV === 'production') {
+        if (env.CORS_ORIGIN === '*') {
+          callback(null, true)
+          return
+        }
+
         callback(null, origin === env.CORS_ORIGIN)
         return
       }
